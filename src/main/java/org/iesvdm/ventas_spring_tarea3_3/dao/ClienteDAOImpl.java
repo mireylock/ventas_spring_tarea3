@@ -57,7 +57,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
         SqlParameterSource params = new MapSqlParameterSource()
                 .addValue("nombre", cliente.getNombre())
-                .addValue("apellido", cliente.getApellido())
+                .addValue("apellido1", cliente.getApellido())
                 .addValue("apellido2", cliente.getApellido2())
                 .addValue("ciudad", cliente.getCiudad())
                 .addValue("categoría", cliente.getCategoria());
@@ -89,7 +89,7 @@ public class ClienteDAOImpl implements ClienteDAO {
                 .queryForObject("SELECT * FROM cliente where id = ?"
                         , (rs, rowNum) -> new Cliente(rs.getInt("id"),
                                 rs.getString("nombre"),
-                                rs.getString("apellido"),
+                                rs.getString("apellido1"),
                                 rs.getString("apellido2"),
                                 rs.getString("ciudad"),
                                 rs.getInt("categoría"))
@@ -99,14 +99,15 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public void update(Cliente Cliente) {
-
-
-
+    public void update(Cliente cliente) {
+        int rows = jdbcTemplate.update(("UPDATE cliente SET nombre = ?, apellido1 = ?, apellido2 = ?, ciudad = ?, categoría = ? WHERE id = ?"), cliente.getNombre(), cliente.getApellido(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria(), cliente.getId());
+        if (rows == 0) System.out.println("Update de cliente con 0 registros actualizados");
     }
 
     @Override
     public void delete(int id) {
+        int rows = jdbcTemplate.update("DELETE FROM cliente WHERE id = ?", id);
+        if (rows == 0) System.out.println("Delete de cliente con 0 registros actualizados");
 
     }
 }
