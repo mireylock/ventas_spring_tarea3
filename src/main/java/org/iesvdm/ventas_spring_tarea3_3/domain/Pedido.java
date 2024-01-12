@@ -11,4 +11,7 @@ public class Pedido {
     private int id;
     private double total;
     private Date fecha;
+    //si le pones el objeto cliente y comercial, la consulta en bdd tiene que traérselños todos porque tiene id solo, no cliente entero
+    private Cliente cliente;
+    private Comercial comercial;
 }

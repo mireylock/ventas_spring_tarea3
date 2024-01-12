@@ -21,18 +21,18 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-    @Override
-    public void create(Cliente cliente) {
-        //RECARGA DE ID AUTOINCREMENT CON JDBCTEMPLATE
-        //se puede hacer de dos formas:
-        //connection/preparedStatement/KeyHolder
+
+    //RECARGA DE ID AUTOINCREMENT CON JDBCTEMPLATE
+    //se puede hacer de dos formas:
+    //connection/preparedStatement/KeyHolder
+    public void create_CON_RECARGA_DE_ID_POR_PS(Cliente cliente) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement("""
                         INSERT INTO cliente
                         (nombre, apellido1, apellido2, ciudad, categoría)
-                        VALUE 
+                        VALUE
                         (?, ?, ?, ?, ?)
                         """, Statement.RETURN_GENERATED_KEYS);
             int idx = 1;
@@ -45,9 +45,12 @@ public class ClienteDAOImpl implements ClienteDAO {
         }, keyHolder);
 
         cliente.setId(keyHolder.getKey().intValue());
+    }
 
 
-        //simpleJdbcInsert
+
+    //simpleJdbcInsert
+    public void create_CON_RECARGA_DE_ID_POR_SIMPLEJDBCINSERT (Cliente cliente) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         simpleJdbcInsert
                 //establecer tabla sobre la que actuar
@@ -65,6 +68,9 @@ public class ClienteDAOImpl implements ClienteDAO {
         Number number = simpleJdbcInsert.executeAndReturnKey(params);
 
         cliente.setId(number.intValue());
+    }
+    @Override
+    public void create(Cliente cliente) {
     }
 
     @Override
