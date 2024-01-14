@@ -48,7 +48,6 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
 
-
     //simpleJdbcInsert
     public void create_CON_RECARGA_DE_ID_POR_SIMPLEJDBCINSERT (Cliente cliente) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);

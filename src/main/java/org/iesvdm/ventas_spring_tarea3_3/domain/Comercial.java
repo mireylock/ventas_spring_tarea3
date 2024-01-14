@@ -2,8 +2,10 @@ package org.iesvdm.ventas_spring_tarea3_3.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class Comercial {
     private int id;
