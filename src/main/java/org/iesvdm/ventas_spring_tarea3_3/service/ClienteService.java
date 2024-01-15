@@ -34,7 +34,7 @@ public class ClienteService {
      * @param cliente
      */
     public void replaceCliente (Cliente cliente) {
-        clienteDAO.find(cliente.getId());
+        clienteDAO.update(cliente);
     }
 
     /**
