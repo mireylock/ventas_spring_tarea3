@@ -27,12 +27,12 @@ public class ComercialController {
         return "comerciales";
     }
 
-    @GetMapping("/comerciales/detalle/{id}")
+    @GetMapping("/comerciales/{id}")
     public String detalle (Model model, @PathVariable Integer id) {
         Comercial comercial = comercialService.detailComercial(id);
         model.addAttribute("comercial", comercial);
 
-        return "detalle-cliente";
+        return "detalle-comercial";
     }
 
 

@@ -31,7 +31,7 @@
             <input type="submit" value="Ver Detalle" class="btn btn-primary"/>
         </form>
 
-        <form th:action="@{/comerciales/editar/}+${comercial.id}" class="col-2">
+        <form th:action="@{/comerciales/editar/__${comercial.id}__}" class="col-2">
             <input type="submit" value="Editar" class="btn btn-info"/>
         </form>
 

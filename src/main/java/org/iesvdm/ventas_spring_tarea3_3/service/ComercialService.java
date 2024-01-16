@@ -34,7 +34,7 @@ public class ComercialService {
      * @param comercial
      */
     public void replaceComercial (Comercial comercial) {
-        comercialDAO.find(comercial.getId());
+        comercialDAO.update(comercial);
     }
 
     /**

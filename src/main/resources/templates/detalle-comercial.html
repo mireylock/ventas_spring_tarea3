@@ -8,7 +8,6 @@
 <body>
 
 <div class="container-fluid" >
-
     <h1 class="row justify-content-center mb-3">Detalle Comercial</h1>
 
     <div class="row justify-content-center">
@@ -50,21 +49,11 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="apellido">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" th:value="${comercial.ciudad}" value="Ciudad" readonly="readonly"/>
+                <label for="comision">Ciudad</label>
+                <input type="text" class="form-control" id="comision" th:value="${comercial.comision}" value="Comision" readonly="readonly"/>
             </div>
         </div>
     </div>
-
-    <div class="row justify-content-center">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="apellido">Categoría</label>
-                <input type="text" class="form-control" id="categoria" th:value="${comercial.categoria}" value="Categoria" readonly="readonly"/>
-            </div>
-        </div>
-    </div>
-
 
     <div class="row justify-content-center">
         <div class="col-1">
