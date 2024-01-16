@@ -2,20 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle Cliente</title>
+    <title>Detalle Comercial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 
 <div class="container-fluid" >
 
-    <h1 class="row justify-content-center mb-3">Detalle Cliente</h1>
+    <h1 class="row justify-content-center mb-3">Detalle Comercial</h1>
 
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
                 <label for="id">Id</label>
-                <input type="text" class="form-control" id="id" th:value="${cliente.id}" value="id" readonly="readonly"/>
+                <input type="text" class="form-control" id="id" th:value="${comercial.id}" value="id" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="nombre">Nombre</label>
-                <input type="text" class="form-control" id="nombre" th:value="${cliente.nombre}" value="Cliente" readonly="readonly"/>
+                <input type="text" class="form-control" id="nombre" th:value="${comercial.nombre}" value="Comercial" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="apellido">Apellido1</label>
-                <input type="text" class="form-control" id="apellido" th:value="${cliente.apellido}" value="Apellido1" readonly="readonly"/>
+                <input type="text" class="form-control" id="apellido" th:value="${comercial.apellido}" value="Apellido1" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -42,7 +42,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="apellido2">Apellido2</label>
-                <input type="text" class="form-control" id="apellido2" th:value="${cliente.apellido2}" value="Apellido2" readonly="readonly"/>
+                <input type="text" class="form-control" id="apellido2" th:value="${comercial.apellido2}" value="Apellido2" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -51,7 +51,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="apellido">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" th:value="${cliente.ciudad}" value="Ciudad" readonly="readonly"/>
+                <input type="text" class="form-control" id="ciudad" th:value="${comercial.ciudad}" value="Ciudad" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -60,7 +60,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="apellido">Categoría</label>
-                <input type="text" class="form-control" id="categoria" th:value="${cliente.categoria}" value="Categoria" readonly="readonly"/>
+                <input type="text" class="form-control" id="categoria" th:value="${comercial.categoria}" value="Categoria" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -68,7 +68,7 @@
 
     <div class="row justify-content-center">
         <div class="col-1">
-            <form action="/clientes" >
+            <form action="/comerciales" >
                 <input type="submit" value="Volver" class="btn btn-danger" />
             </form>
         </div>

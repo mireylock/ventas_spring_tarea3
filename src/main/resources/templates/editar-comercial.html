@@ -1,0 +1,78 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle Comercial</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid" >
+
+  <form th:action="@{/comerciales/editar/__${comercial.id}__}" th:object="${comercial}" th:method="post" >
+    <h1 class="row justify-content-center mb-3">Editar Comercial</h1>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="id">Id</label>
+          <input type="text" class="form-control" id="id" th:field="*{id}" value="id" readonly="readonly"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input type="text" class="form-control" id="nombre" th:field="*{nombre}" value="Comercial" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="apellido">Apellido1</label>
+          <input type="text" class="form-control" id="apellido" th:field="*{apellido}" value="Apellido1" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="apellido2">Apellido2</label>
+          <input type="text" class="form-control" id="apellido2" th:field="*{apellido2}" value="Apellido2" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <div class="form-group">
+          <label for="comision">Comisión</label>
+          <input type="text" class="form-control" id="comision" th:field="*{comision}" value="Comision" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="col-1">
+        <form action="/comerciales" >
+          <input type="submit" value="Cancelar" class="btn btn-danger">
+        </form>
+      </div>
+
+      <div class="col-1">
+        <input type="submit" value="Guardar" class="btn btn-success"/>
+      </div>
+    </div>
+  </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+</body>
+</html>

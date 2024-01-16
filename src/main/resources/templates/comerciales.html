@@ -1,10 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Comerciales</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<div class="container-fluid">
+    <h1 class="row justify-content-center mb-3">Comerciales</h1>
+    <form th:action="@{/comerciales/crear}" class="row justify-content-center mb-3">
+        <input type="submit" value="Crear" class="btn btn-success">
+    </form>
+
+    <div class="row mb-3 font-weight-bold bg-dark text-white">
+        <div class="col-1">Id</div>
+        <div class="col-1">Nombre</div>
+        <div class="col-1">Apellido1</div>
+        <div class="col-1">Apellido2</div>
+        <div class="col-1">Comisión</div>
+    </div>
+
+    <div  th:each="comercial : ${listaComerciales}" class="row mb-2">
+        <div th:text="${comercial.id}" class="col-1">Id</div>
+        <div th:text="${comercial.nombre}" class="col-1">Nombre</div>
+        <div th:text="${comercial.apellido}" class="col-1">Apellido1</div>
+        <div th:text="${comercial.apellido2}" class="col-1">Apellido2</div>
+        <div th:text="${comercial.comision}" class="col-1">Comisión</div>
+
+        <form th:action="@{/comerciales/__${comercial.id}__}" class="col-2">
+            <input type="submit" value="Ver Detalle" class="btn btn-primary"/>
+        </form>
+
+        <form th:action="@{/comerciales/editar/}+${comercial.id}" class="col-2">
+            <input type="submit" value="Editar" class="btn btn-info"/>
+        </form>
+
+        <!-- Botón para el modal de alerta de eliminación-->
+        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${comercial.id}">
+            Eliminar
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" th:id="'confirmDeleteModal_' + ${comercial.id}"  tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea eliminar este comercial?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <form th:action="@{/comerciales/borrar/__${comercial.id}__}" method="post">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 </body>
 </html>
