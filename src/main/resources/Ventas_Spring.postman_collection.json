@@ -46,6 +46,63 @@
 			"response": []
 		},
 		{
+			"name": "http://localhost:8080/clientes/crear",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Paco",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Pérez",
+							"type": "text"
+						},
+						{
+							"key": "apellido2",
+							"value": "Pérez",
+							"type": "text"
+						},
+						{
+							"key": "ciudad",
+							"value": "Málaga",
+							"type": "text"
+						},
+						{
+							"key": "categoria",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"crear"
+					],
+					"query": [
+						{
+							"key": "1",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "http://localhost:8080/clientes/1",
 			"request": {
 				"method": "GET",
@@ -91,6 +148,10 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": []
+				},
 				"url": {
 					"raw": "http://localhost:8080/clientes/borrar/1",
 					"protocol": "http",
@@ -203,6 +264,51 @@
 						"comerciales",
 						"borrar",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/comerciales/crear",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "nombre",
+							"value": "Paco",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Pérez",
+							"type": "text"
+						},
+						{
+							"key": "apellido2",
+							"value": "Pérez",
+							"type": "text"
+						},
+						{
+							"key": "comision",
+							"value": "5.5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/comerciales/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"comerciales",
+						"crear"
 					]
 				}
 			},

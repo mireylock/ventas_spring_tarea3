@@ -12,6 +12,6 @@ public class Pedido {
     private double total;
     private Date fecha;
     //Al poner el objeto cliente y comercial, la consulta en bdd tiene que traérselos todos porque en bbdd tiene solo sus ids, no cliente/comercial enteros
-    private Cliente cliente;
+    private Cliente Cliente;
     private Comercial comercial;
 }

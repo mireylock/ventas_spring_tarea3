@@ -7,7 +7,7 @@ import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
 import java.util.Optional;
 
 
-public interface PedidoDAO extends RepositoryBase {
+public interface PedidoDAO<Pedido> extends RepositoryBase<Pedido> {
     public Optional<Cliente> findClienteBy(int pedidoId);
 
     public Optional<Comercial> findComercialBy(int pedidoId);
