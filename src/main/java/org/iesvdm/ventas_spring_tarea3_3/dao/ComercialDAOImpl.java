@@ -100,8 +100,11 @@ public class ComercialDAOImpl implements ComercialDAO {
 
     @Override
     public void delete(int id) {
-        int rows = jdbcTemplate.update("DELETE FROM comercial WHERE id = ?", id);
-        if (rows == 0) System.out.println("Delete de comercial con 0 registros actualizados");
+        //En la bbdd no está on delete cascade para los comerciales, por lo que para borrar un comercial, hay que borrar primero los pedidos que tiene asociados
+        int rowsPedido = jdbcTemplate.update("DELETE FROM pedido WHERE id_comercial= ?", id);
+        int rowsComercial = jdbcTemplate.update("DELETE FROM comercial WHERE id = ?", id);
+        if (rowsPedido == 0) System.out.println("Delete de comercial con 0 registros actualizados");
+        if (rowsComercial == 0) System.out.println("Delete de comercial con 0 registros actualizados");
 
     }
 }

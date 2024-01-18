@@ -111,6 +111,7 @@ public class ClienteDAOImpl implements ClienteDAO {
 
     @Override
     public void delete(int id) {
+        //en cliente se puede borrar directamente porque en bbdd los pedidos asociados a un cliente están on delete cascade
         int rows = jdbcTemplate.update("DELETE FROM cliente WHERE id = ?", id);
         if (rows == 0) System.out.println("Delete de cliente con 0 registros actualizados");
 

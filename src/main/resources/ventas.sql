@@ -28,7 +28,6 @@ CREATE TABLE pedido (
   FOREIGN KEY (id_cliente) REFERENCES cliente(id)
         ON DELETE CASCADE,
   FOREIGN KEY (id_comercial) REFERENCES comercial(id)
-        ON DELETE CASCADE
 );
 
 INSERT INTO cliente VALUES(1, 'Aarón', 'Rivero', 'Gómez', 'Almería', 100);
