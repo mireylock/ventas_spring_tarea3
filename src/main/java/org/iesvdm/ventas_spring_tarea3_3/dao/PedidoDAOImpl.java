@@ -58,7 +58,8 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
 
     @Override
     public Optional<Pedido> find(int id) {
-        return Optional.empty();
+        return null;
+
     }
 
     @Override

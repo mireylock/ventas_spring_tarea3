@@ -16,13 +16,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ComercialDAOImpl implements ComercialDAO {
+public class ComercialDAOImpl implements RepositoryBase<Comercial> {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
     @Override
-    public void create(Comercial comercial){
-    }
     public void create_CON_RECARGA_DE_ID_POR_PS(Comercial comercial) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ClienteDAOImpl implements ClienteDAO {
+public class ClienteDAOImpl implements RepositoryBase<Cliente> {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -25,6 +25,7 @@ public class ClienteDAOImpl implements ClienteDAO {
     //RECARGA DE ID AUTOINCREMENT CON JDBCTEMPLATE
     //se puede hacer de dos formas:
     //connection/preparedStatement/KeyHolder
+    @Override
     public void create_CON_RECARGA_DE_ID_POR_PS(Cliente cliente) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
@@ -67,9 +68,6 @@ public class ClienteDAOImpl implements ClienteDAO {
         Number number = simpleJdbcInsert.executeAndReturnKey(params);
 
         cliente.setId(number.intValue());
-    }
-    @Override
-    public void create(Cliente cliente) {
     }
 
     @Override
