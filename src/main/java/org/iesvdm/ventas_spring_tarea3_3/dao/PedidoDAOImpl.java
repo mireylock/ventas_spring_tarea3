@@ -50,35 +50,64 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
         List<Pedido> listPedido = this.jdbcTemplate.query("""
                 SELECT * FROM  pedido P left join cliente C on  P.id_cliente = C.id
                                         left join comercial CO on P.id_comercial = CO.id
-                """, (rs, rowNum) -> UtilDAO.newPedido(rs)
-        );
+                """, (rs, rowNum) -> UtilDAO.newPedido(rs));
 
         return listPedido;
     }
 
     @Override
     public Optional<Pedido> find(int id) {
-        return null;
+        Pedido pedido = this.jdbcTemplate.queryForObject("""
+                   SELECT * FROM  pedido P left join cliente C on  P.id_cliente = C.id
+                                        left join comercial CO on P.id_comercial = CO.id
+                                        WHERE P.id = ?
+                """, (rs, rowNum) -> UtilDAO.newPedido(rs), id);
 
+        if (pedido !=null) {
+            return Optional.of(pedido);
+        } else {
+            //log.debug("No encontrado pedido con id {} devolviendo Optional.empty()", id);
+            return Optional.empty();
+        }
     }
 
     @Override
     public void update(Pedido pedido) {
-
+        this.jdbcTemplate.update("""
+            UPDATE pedido SET total = ?, fecha = ?, id_cliente = ?, id_comercial = ? WHERE id = ?
+            """, pedido.getTotal(), pedido.getFecha(), pedido.getCliente().getId(), pedido.getComercial().getId(), pedido.getId());
     }
 
     @Override
     public void delete(int id) {
-
+        this.jdbcTemplate.update("""
+            DELETE from pedido WHERE id = ?
+        """, id);
     }
 
     @Override
     public Optional<Cliente> findClienteBy(int pedidoId) {
-        return Optional.empty();
+        Cliente cliente = this.jdbcTemplate.queryForObject("""
+                SELECT C.* FROM pedido P join cliente C on P.id_cliente = C.id and P.id = ?
+                """, (rs, rowNum) -> UtilDAO.newCliente(rs), pedidoId);
+
+        if (cliente != null) {
+            return Optional.of(cliente);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<Comercial> findComercialBy(int pedidoId) {
-        return Optional.empty();
+        Comercial comercial = this.jdbcTemplate.queryForObject("""
+                SELECT Co.* FROM pedido P join comercial Co on P.id_comercial = Co.id and P.id = ?
+                """, (rs, rowNum) -> UtilDAO.newComercial(rs), pedidoId);
+
+        if (comercial != null) {
+            return Optional.of(comercial);
+        } else {
+            return Optional.empty();
+        }
     }
 }

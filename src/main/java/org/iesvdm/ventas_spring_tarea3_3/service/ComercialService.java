@@ -53,6 +53,7 @@ public class ComercialService {
     public Comercial detailComercial(Integer id) {
         Optional<Comercial> opComercial = comercialDAO.find(id);
 
+
         if(opComercial.isPresent()) {
             return opComercial.get();
         } else {

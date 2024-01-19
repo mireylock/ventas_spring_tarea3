@@ -56,6 +56,20 @@
     </div>
 
     <div class="row justify-content-center">
+        <h1>Pedidos del comercial</h1>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="idPedido">Ciudad</label>
+                <input type="text" class="form-control" id="idPedido" th:value="${}" value="idPedido" readonly="readonly"/>
+            </div>
+        </div>
+
+
+
+    </div>
+
+    <div class="row justify-content-center">
         <div class="col-1">
             <form action="/comerciales" >
                 <input type="submit" value="Volver" class="btn btn-danger" />
