@@ -1,7 +1,9 @@
 package org.iesvdm.ventas_spring_tarea3_3.service;
 
 import org.iesvdm.ventas_spring_tarea3_3.dao.ComercialDAOImpl;
+import org.iesvdm.ventas_spring_tarea3_3.dao.PedidoDAOImpl;
 import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import java.util.Optional;
 public class ComercialService {
     @Autowired
     private ComercialDAOImpl comercialDAO;
+
+    @Autowired
+    private PedidoDAOImpl pedidoDAO;
 
     /**
      * Crea un comercial
@@ -53,12 +58,17 @@ public class ComercialService {
     public Comercial detailComercial(Integer id) {
         Optional<Comercial> opComercial = comercialDAO.find(id);
 
-
         if(opComercial.isPresent()) {
             return opComercial.get();
         } else {
             return null;
         }
+    }
+
+    public List<Pedido> pedidosComercial (Integer id) {
+        List<Pedido> listaPedidosComercial = pedidoDAO.findByIdComercial(id);
+
+        return listaPedidosComercial;
     }
 
 }

@@ -53,7 +53,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ¿Está seguro de que desea eliminar este cliente?
+                            ¿Está seguro de que desea eliminar el cliente <span th:text="${cliente.id}+' ('+${cliente.nombre}+' '+${cliente.apellido}+(${cliente.apellido2}?' '+${cliente.apellido2}:'')+')'"></span>?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

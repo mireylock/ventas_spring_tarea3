@@ -55,26 +55,28 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <h1>Pedidos del comercial</h1>
+    <div>
+        <h2  class="row justify-content-center mb-3">Pedidos asociados</h2>
 
-        <div class="col-md-4">
-            <div class="form-group">
-                <label for="idPedido">Ciudad</label>
-                <input type="text" class="form-control" id="idPedido" th:value="${}" value="idPedido" readonly="readonly"/>
-            </div>
+        <div class="row justify-content-center mb-3">
+            <div class="col-1 font-weight-bold bg-dark text-white">Id</div>
+            <div class="col-1 font-weight-bold bg-dark text-white">Total</div>
+            <div class="col-1 font-weight-bold bg-dark text-white">Fecha</div>
+            <div class="col-1 font-weight-bold bg-dark text-white">Cliente</div>
         </div>
 
-
-
+        <div th:each="pedidoComercial : ${listaPedidosComercial}" class="row justify-content-center mb-2">
+            <div th:text="${pedidoComercial.id}" class="col-1"></div>
+            <div th:text="${pedidoComercial.total}" class="col-1"></div>
+            <div th:text="${pedidoComercial.fecha}" class="col-1"></div>
+            <a th:href="@{/clientes/__${pedidoComercial.getCliente().getId()}__}" th:text="${pedidoComercial.getCliente().getNombre()}" class="col-1"></a>
+        </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-1">
-            <form action="/comerciales" >
-                <input type="submit" value="Volver" class="btn btn-danger" />
-            </form>
-        </div>
+    <div class="row justify-content-center mb-5">
+        <form action="/comerciales" >
+            <input type="submit" value="Volver" class="btn btn-danger" />
+        </form>
     </div>
 
 </div>

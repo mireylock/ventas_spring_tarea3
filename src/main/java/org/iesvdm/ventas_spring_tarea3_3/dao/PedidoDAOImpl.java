@@ -1,8 +1,6 @@
 package org.iesvdm.ventas_spring_tarea3_3.dao;
 
 
-import org.iesvdm.ventas_spring_tarea3_3.domain.Cliente;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +8,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -52,6 +49,7 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
                                         left join comercial CO on P.id_comercial = CO.id
                 """, (rs, rowNum) -> UtilDAO.newPedido(rs));
 
+
         return listPedido;
     }
 
@@ -86,28 +84,13 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
     }
 
     @Override
-    public Optional<Cliente> findClienteBy(int pedidoId) {
-        Cliente cliente = this.jdbcTemplate.queryForObject("""
-                SELECT C.* FROM pedido P join cliente C on P.id_cliente = C.id and P.id = ?
-                """, (rs, rowNum) -> UtilDAO.newCliente(rs), pedidoId);
+    public List<Pedido> findByIdComercial(int idComercial) {
+        List<Pedido> listaPedidosComercial = this.jdbcTemplate.query("""
+                   SELECT * FROM  pedido P join comercial CO on P.id_comercial = CO.id 
+                   join cliente C on P.id_cliente = C.id
+                   WHERE CO.id = ?
+                """, (rs, rowNum) -> UtilDAO.newPedido(rs), idComercial);
 
-        if (cliente != null) {
-            return Optional.of(cliente);
-        } else {
-            return Optional.empty();
-        }
-    }
-
-    @Override
-    public Optional<Comercial> findComercialBy(int pedidoId) {
-        Comercial comercial = this.jdbcTemplate.queryForObject("""
-                SELECT Co.* FROM pedido P join comercial Co on P.id_comercial = Co.id and P.id = ?
-                """, (rs, rowNum) -> UtilDAO.newComercial(rs), pedidoId);
-
-        if (comercial != null) {
-            return Optional.of(comercial);
-        } else {
-            return Optional.empty();
-        }
+       return listaPedidosComercial;
     }
 }

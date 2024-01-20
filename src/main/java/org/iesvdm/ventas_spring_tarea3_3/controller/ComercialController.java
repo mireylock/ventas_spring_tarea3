@@ -1,6 +1,7 @@
 package org.iesvdm.ventas_spring_tarea3_3.controller;
 
 import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
 import org.iesvdm.ventas_spring_tarea3_3.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.view.RedirectView;
 import java.util.List;
 
 @Controller
+
 public class ComercialController {
     @Autowired
     private ComercialService comercialService;
@@ -31,6 +33,10 @@ public class ComercialController {
     public String detalle (Model model, @PathVariable Integer id) {
         Comercial comercial = comercialService.detailComercial(id);
         model.addAttribute("comercial", comercial);
+
+        //Se añaden los pedidos del comercial al detalle del comercial
+        List<Pedido> listaPedidosComercial = comercialService.pedidosComercial(id);
+        model.addAttribute("listaPedidosComercial", listaPedidosComercial);
 
         return "detalle-comercial";
     }
