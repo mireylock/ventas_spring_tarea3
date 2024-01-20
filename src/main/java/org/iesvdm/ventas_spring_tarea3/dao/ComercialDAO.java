@@ -1,10 +1,6 @@
-package org.iesvdm.ventas_spring_tarea3_3.dao;
+package org.iesvdm.ventas_spring_tarea3.dao;
 
-import org.iesvdm.ventas_spring_tarea3_3.domain.Cliente;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
-
-import java.util.List;
-import java.util.Optional;
+import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 
 public interface ComercialDAO extends RepositoryBase<Comercial> {
 //    public void create(Comercial comercial);

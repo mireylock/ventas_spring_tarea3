@@ -1,4 +1,4 @@
-package org.iesvdm.ventas_spring_tarea3_3.dao;
+package org.iesvdm.ventas_spring_tarea3.dao;
 
 import java.util.List;
 import java.util.Optional;

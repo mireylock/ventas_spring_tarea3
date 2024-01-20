@@ -1,9 +1,4 @@
-package org.iesvdm.ventas_spring_tarea3_3.dao;
-
-import org.iesvdm.ventas_spring_tarea3_3.domain.Cliente;
-
-import java.util.List;
-import java.util.Optional;
+package org.iesvdm.ventas_spring_tarea3.dao;
 
 public interface ClienteDAO {
 //    public void create(Cliente cliente);

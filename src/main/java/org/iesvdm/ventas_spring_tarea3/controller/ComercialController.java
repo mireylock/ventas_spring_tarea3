@@ -1,8 +1,8 @@
-package org.iesvdm.ventas_spring_tarea3_3.controller;
+package org.iesvdm.ventas_spring_tarea3.controller;
 
-import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
-import org.iesvdm.ventas_spring_tarea3_3.service.ComercialService;
+import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
+import org.iesvdm.ventas_spring_tarea3.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

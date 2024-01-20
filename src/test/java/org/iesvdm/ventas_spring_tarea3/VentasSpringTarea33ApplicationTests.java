@@ -1,9 +1,9 @@
-package org.iesvdm.ventas_spring_tarea3_3;
+package org.iesvdm.ventas_spring_tarea3;
 
 
 
-import org.iesvdm.ventas_spring_tarea3_3.dao.ClienteDAOImpl;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Cliente;
+import org.iesvdm.ventas_spring_tarea3.dao.ClienteDAOImpl;
+import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

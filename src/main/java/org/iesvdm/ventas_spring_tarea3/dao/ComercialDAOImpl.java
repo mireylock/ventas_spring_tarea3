@@ -1,6 +1,6 @@
-package org.iesvdm.ventas_spring_tarea3_3.dao;
+package org.iesvdm.ventas_spring_tarea3.dao;
 
-import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

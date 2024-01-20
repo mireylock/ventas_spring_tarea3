@@ -1,8 +1,8 @@
-package org.iesvdm.ventas_spring_tarea3_3.dao;
+package org.iesvdm.ventas_spring_tarea3.dao;
 
-import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Cliente;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
+import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
+import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 
 
 import java.sql.ResultSet;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class UtilDAO {
     public static Pedido newPedido(ResultSet rs) throws SQLException {
-        return new org.iesvdm.ventas_spring_tarea3_3.domain.Pedido(rs.getInt("id"),
+        return new org.iesvdm.ventas_spring_tarea3.domain.Pedido(rs.getInt("id"),
                 rs.getDouble("total"),
                 rs.getDate("fecha"),
                 new Cliente(rs.getInt("C.id"),

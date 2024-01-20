@@ -1,7 +1,7 @@
-package org.iesvdm.ventas_spring_tarea3_3.service;
+package org.iesvdm.ventas_spring_tarea3.service;
 
-import org.iesvdm.ventas_spring_tarea3_3.dao.ClienteDAOImpl;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Cliente;
+import org.iesvdm.ventas_spring_tarea3.dao.ClienteDAOImpl;
+import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

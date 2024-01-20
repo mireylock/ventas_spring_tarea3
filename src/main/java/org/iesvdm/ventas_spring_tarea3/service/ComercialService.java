@@ -1,9 +1,9 @@
-package org.iesvdm.ventas_spring_tarea3_3.service;
+package org.iesvdm.ventas_spring_tarea3.service;
 
-import org.iesvdm.ventas_spring_tarea3_3.dao.ComercialDAOImpl;
-import org.iesvdm.ventas_spring_tarea3_3.dao.PedidoDAOImpl;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Comercial;
-import org.iesvdm.ventas_spring_tarea3_3.domain.Pedido;
+import org.iesvdm.ventas_spring_tarea3.dao.ComercialDAOImpl;
+import org.iesvdm.ventas_spring_tarea3.dao.PedidoDAOImpl;
+import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.iesvdm.ventas_spring_tarea3_3.domain;
+package org.iesvdm.ventas_spring_tarea3.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
