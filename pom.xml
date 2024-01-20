@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.iesvdm</groupId>
-    <artifactId>ventas_Spring_tarea3_3</artifactId>
+    <artifactId>ventas_Spring_tarea3</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>ventas_Spring_tarea3_3</name>
     <description>ventas_Spring_tarea3_3</description>
