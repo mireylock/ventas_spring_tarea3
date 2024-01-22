@@ -8,12 +8,12 @@
 <body>
 
 <div class="container-fluid" >
-    <h1 class="row justify-content-center mb-3">Detalle Cliente</h1>
+    <h1 class="row justify-content-center mb-3" th:text="#{detalleCliente}">Detalle Cliente</h1>
 
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="id">Id</label>
+                <label for="id" th:text="#{id}">Id</label>
                 <input type="text" class="form-control" id="id" th:value="${cliente.id}" value="id" readonly="readonly"/>
             </div>
         </div>
@@ -22,7 +22,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
+                <label for="nombre" th:text="#{nombre}">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:value="${cliente.nombre}" value="Cliente" readonly="readonly"/>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="apellido">Apellido1</label>
+                <label for="apellido" th:text="#{apellido1}">Apellido1</label>
                 <input type="text" class="form-control" id="apellido" th:value="${cliente.apellido}" value="Apellido1" readonly="readonly"/>
             </div>
         </div>
@@ -40,7 +40,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="apellido2">Apellido2</label>
+                <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
                 <input type="text" class="form-control" id="apellido2" th:value="${cliente.apellido2}" value="Apellido2" readonly="readonly"/>
             </div>
         </div>
@@ -49,7 +49,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="ciudad">Ciudad</label>
+                <label for="ciudad" th:text="#{ciudad}">Ciudad</label>
                 <input type="text" class="form-control" id="ciudad" th:value="${cliente.ciudad}" value="Ciudad" readonly="readonly"/>
             </div>
         </div>
@@ -58,7 +58,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="categoria">Categoría</label>
+                <label for="categoria" th:text="#{categoria}">Categoría</label>
                 <input type="text" class="form-control" id="categoria" th:value="${cliente.categoria}" value="Categoria" readonly="readonly"/>
             </div>
         </div>
@@ -68,7 +68,7 @@
     <div class="row justify-content-center">
         <div class="col-1">
             <form action="/clientes" >
-                <input type="submit" value="Volver" class="btn btn-danger" />
+                <input type="submit" th:value="#{btnVolver}" value="volver" class="btn btn-danger" />
             </form>
         </div>
     </div>

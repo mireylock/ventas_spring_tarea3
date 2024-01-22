@@ -7,56 +7,54 @@
 </head>
 <body>
 <div class="container-fluid">
-    <h1 class="row justify-content-center mb-3">Comerciales</h1>
+    <h1 class="row justify-content-center mb-3" th:text="#{comerciales}">Comerciales</h1>
     <form th:action="@{/comerciales/crear}" class="row justify-content-center mb-3">
-        <input type="submit" value="Crear" class="btn btn-success">
+        <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success">
     </form>
 
     <div class="row mb-3 font-weight-bold bg-dark text-white">
-        <div class="col-1">Id</div>
-        <div class="col-1">Nombre</div>
-        <div class="col-1">Apellido1</div>
-        <div class="col-1">Apellido2</div>
-        <div class="col-1">Comisión</div>
+        <div class="col-1" th:text="#{id}">Id</div>
+        <div class="col-1" th:text="#{nombre}">Nombre</div>
+        <div class="col-1" th:text="#{apellido1}">Apellido1</div>
+        <div class="col-1" th:text="#{apellido2}">Apellido2</div>
+        <div class="col-1" th:text="#{comision}">Comisión</div>
     </div>
 
     <div  th:each="comercial : ${listaComerciales}" class="row mb-2">
-        <div th:text="${comercial.id}" class="col-1"></div>
-        <div th:text="${comercial.nombre}" class="col-1"></div>
-        <div th:text="${comercial.apellido}" class="col-1"></div>
-        <div th:text="${comercial.apellido2}" class="col-1"></div>
-        <div th:text="${comercial.comision}" class="col-1"></div>
+        <div th:text="${comercial.id}" class="col-1">Id</div>
+        <div th:text="${comercial.nombre}" class="col-1">Nombre</div>
+        <div th:text="${comercial.apellido}" class="col-1">Apellido1</div>
+        <div th:text="${comercial.apellido2}" class="col-1">Apellido2</div>
+        <div th:text="${comercial.comision}" class="col-1">Comisión</div>
 
         <form th:action="@{/comerciales/__${comercial.id}__}" class="col-2">
-            <input type="submit" value="Ver Detalle" class="btn btn-primary"/>
+            <input type="submit" th:value="#{btnVerDetalle}" value="Ver Detalle" class="btn btn-primary"/>
         </form>
 
         <form th:action="@{/comerciales/editar/__${comercial.id}__}" class="col-2">
-            <input type="submit" value="Editar" class="btn btn-info"/>
+            <input type="submit" th:value="#{btnEditar}" value="Editar" class="btn btn-info"/>
         </form>
 
         <!-- Botón para el modal de alerta de eliminación-->
-        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${comercial.id}">
-            Eliminar
-        </button>
+        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${comercial.id}" th:text="#{btnEliminar}">Eliminar</button>
 
         <!-- Modal -->
         <div class="modal fade" th:id="'confirmDeleteModal_' + ${comercial.id}"  tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden>
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Eliminación</h5>
+                        <h5 class="modal-title" id="confirmDeleteModalLabel" th:text="#{confirmElim}"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        ¿Está seguro de que desea eliminar el comercial <span th:text="${comercial.id}+' ('+${comercial.nombre}+' '+${comercial.apellido}+(${comercial.apellido2}?' '+${comercial.apellido2}:'')+')'"></span>?
+                        <span th:text="#{msgConfirmElim}+' '+${comercial.id}+' ('+${comercial.nombre}+' '+${comercial.apellido}+(${comercial.apellido2}?' '+${comercial.apellido2}:'')+')'"></span>?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{btnCancelar}">Cancelar</button>
                         <form th:action="@{/comerciales/borrar/__${comercial.id}__}" method="post">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                            <button type="submit" class="btn btn-danger" th:text="#{btnEliminar}">Eliminar</button>
                         </form>
                     </div>
                 </div>

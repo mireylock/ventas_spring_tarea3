@@ -9,12 +9,12 @@
 
 <div class="container-fluid">
     <form th:action="@{/comerciales/crear}" th:object="${comercial}" th:method="post">
-        <h1 class="row justify-content-center mb-3">Crear Comercial</h1>
+        <h1 class="row justify-content-center mb-3" th:text="#{crearComercial}">Crear Comercial</h1>
 
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="nombre">Nombre</label>
+                    <label for="nombre" th:text="#{nombre}">Nombre</label>
                     <input type="text" class="form-control" id="nombre" th:field="*{nombre}" value="Comercial" />
                 </div>
             </div>
@@ -23,7 +23,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="apellido">Apellido1</label>
+                    <label for="apellido" th:text="#{apellido1}">Apellido1</label>
                     <input type="text" class="form-control" id="apellido" th:field="*{apellido}" value="Apellido1" />
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="apellido2">Apellido2</label>
+                    <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
                     <input type="text" class="form-control" id="apellido2" th:field="*{apellido2}" value="Apellido2" />
                 </div>
             </div>
@@ -41,7 +41,7 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="form-group">
-                    <label for="comision">Comisión</label>
+                    <label for="comision" th:text="#{comision}">Comisión</label>
                     <input type="text" class="form-control" id="comision" th:field="*{comision}" value="Comision" />
                 </div>
             </div>
@@ -49,11 +49,11 @@
 
         <div class="row justify-content-center">
             <div class="col-1">
-                <a href="/comerciales" class="btn btn-danger">Cancelar</a>
+                <a href="/comerciales" class="btn btn-danger" th:text="#{btnCancelar}">Cancelar</a>
             </div>
 
             <div class="col-1">
-                <input type="submit" value="Crear" class="btn btn-success"/>
+                <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success"/>
             </div>
         </div>
     </form>

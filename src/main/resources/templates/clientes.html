@@ -7,62 +7,69 @@
 </head>
 <body>
 <div class="container-fluid">
-        <h1 class="row justify-content-center mb-3" th:text="#{clientes}"></h1>
-        <form th:action="@{/clientes/crear}" class="row justify-content-center mb-3">
-            <input type="submit" th:value="#{btnCrear}" class="btn btn-success">
+    <div class="col-md-4 align-self-center" >
+        <span th:text="#{lang.cambio}"></span>:
+        <select id="locales">
+            <option value="es" th:text="#{lang.espaniol}"></option>
+            <option value="en" th:text="#{lang.ingles}"></option>
+        </select>
+    </div>
+    <h1 class="row justify-content-center mb-3" th:text="#{clientes}"></h1>
+    <form th:action="@{/clientes/crear}" class="row justify-content-center mb-3">
+        <input type="submit" th:value="#{btnCrear}" class="btn btn-success">
+    </form>
+
+    <div class="row mb-3 font-weight-bold bg-dark text-white">
+        <div class="col-1" th:text="#{id}">Id</div>
+        <div class="col-1" th:text="#{nombre}">Nombre</div>
+        <div class="col-1" th:text="#{apellido1}">Apellido1</div>
+        <div class="col-1" th:text="#{apellido2}">Apellido2</div>
+        <div class="col-1" th:text="#{ciudad}">Ciudad</div>
+        <div class="col-1" th:text="#{categoria}">Categoría</div>
+    </div>
+
+    <div  th:each="cliente : ${listaClientes}" class="row mb-2">
+        <div th:text="${cliente.id}" class="col-1">Id</div>
+        <div th:text="${cliente.nombre}" class="col-1">Nombre</div>
+        <div th:text="${cliente.apellido}" class="col-1">Apellido1</div>
+        <div th:text="${cliente.apellido2}" class="col-1">Apellido2</div>
+        <div th:text="${cliente.ciudad}" class="col-1">Ciudad</div>
+        <div th:text="${cliente.categoria}" class="col-1">Categoría</div>
+
+        <form th:action="@{/clientes/__${cliente.id}__}" class="col-2">
+            <input type="submit" th:value="#{btnVerDetalle}" value="Ver Detalle" class="btn btn-primary"/>
         </form>
 
-        <div class="row mb-3 font-weight-bold bg-dark text-white">
-            <div class="col-1" th:text="#{id}"></div>
-            <div class="col-1" th:text="#{nombre}"></div>
-            <div class="col-1" th:text="#{apellido1}"></div>
-            <div class="col-1" th:text="#{apellido2}"></div>
-            <div class="col-1" th:text="#{ciudad}"></div>
-            <div class="col-1" th:text="#{categoria}"></div>
-        </div>
+        <form th:action="@{/clientes/editar/__${cliente.id}__}" class="col-2">
+            <input type="submit" th:value="#{btnEditar}" value="Editar" class="btn btn-info"/>
+        </form>
 
-        <div  th:each="cliente : ${listaClientes}" class="row mb-2">
-            <div th:text="${cliente.id}" class="col-1"></div>
-            <div th:text="${cliente.nombre}" class="col-1"></div>
-            <div th:text="${cliente.apellido}" class="col-1"></div>
-            <div th:text="${cliente.apellido2}" class="col-1"></div>
-            <div th:text="${cliente.ciudad}" class="col-1"></div>
-            <div th:text="${cliente.categoria}" class="col-1"></div>
+        <!-- Botón para el modal de alerta de eliminación-->
+        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${cliente.id}" th:text="#{btnEliminar}">Eliminar</button>
 
-            <form th:action="@{/clientes/__${cliente.id}__}" class="col-2">
-                <input type="submit" th:value="#{btnVerDetalle}" class="btn btn-primary"/>
-            </form>
-
-            <form th:action="@{/clientes/editar/__${cliente.id}__}" class="col-2">
-                <input type="submit" th:value="#{btnEditar}" class="btn btn-info"/>
-            </form>
-
-            <!-- Botón para el modal de alerta de eliminación-->
-            <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${cliente.id}" th:text="#{btnEliminar}"></button>
-
-            <!-- Modal -->
-            <div class="modal fade" th:id="'confirmDeleteModal_' + ${cliente.id}"  tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="confirmDeleteModalLabel" th:text="#{confirmElim}"></h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p th:text="#{msgConfirmElim}+' '+${cliente.id}+' ('+${cliente.nombre}+' '+${cliente.apellido}+(${cliente.apellido2}?' '+${cliente.apellido2}:'')+')?'"></p>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{btnCancelar}"></button>
-                            <form th:action="@{/clientes/borrar/__${cliente.id}__}" method="post">
-                                <button type="submit" class="btn btn-danger" th:text="#{btnEliminar}"></button>
-                            </form>
-                        </div>
+        <!-- Modal -->
+        <div class="modal fade" th:id="'confirmDeleteModal_' + ${cliente.id}"  tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmDeleteModalLabel" th:text="#{confirmElim}"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p th:text="#{msgConfirmElim}+' '+${cliente.id}+' ('+${cliente.nombre}+' '+${cliente.apellido}+(${cliente.apellido2}?' '+${cliente.apellido2}:'')+')?'"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{btnCancelar}"></button>
+                        <form th:action="@{/clientes/borrar/__${cliente.id}__}" method="post">
+                            <button type="submit" class="btn btn-danger" th:text="#{btnEliminar}"></button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

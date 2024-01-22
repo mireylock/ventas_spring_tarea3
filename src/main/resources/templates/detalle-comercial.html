@@ -8,12 +8,12 @@
 <body>
 
 <div class="container-fluid" >
-    <h1 class="row justify-content-center mb-3">Detalle Comercial</h1>
+    <h1 class="row justify-content-center mb-3" th:text="#{detalleComercial}">Detalle Comercial</h1>
 
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="id">Id</label>
+                <label for="id" th:text="#{id}">Id</label>
                 <input type="text" class="form-control" id="id" th:value="${comercial.id}" value="id" readonly="readonly"/>
             </div>
         </div>
@@ -22,7 +22,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="nombre">Nombre</label>
+                <label for="nombre" th:text="#{nombre}">Nombre</label>
                 <input type="text" class="form-control" id="nombre" th:value="${comercial.nombre}" value="Comercial" readonly="readonly"/>
             </div>
         </div>
@@ -31,7 +31,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="apellido">Apellido1</label>
+                <label for="apellido" th:text="#{apellido1}">Apellido1</label>
                 <input type="text" class="form-control" id="apellido" th:value="${comercial.apellido}" value="Apellido1" readonly="readonly"/>
             </div>
         </div>
@@ -40,7 +40,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="apellido2">Apellido2</label>
+                <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
                 <input type="text" class="form-control" id="apellido2" th:value="${comercial.apellido2}" value="Apellido2" readonly="readonly"/>
             </div>
         </div>
@@ -49,20 +49,20 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
-                <label for="comision">Ciudad</label>
+                <label for="comision" th:text="#{comision}">Comisión</label>
                 <input type="text" class="form-control" id="comision" th:value="${comercial.comision}" value="Comision" readonly="readonly"/>
             </div>
         </div>
     </div>
 
     <div>
-        <h2  class="row justify-content-center mb-3">Pedidos asociados</h2>
+        <h2  class="row justify-content-center mb-3" th:text="#{pedidosAsociados}">Pedidos asociados</h2>
 
         <div class="row justify-content-center mb-3">
-            <div class="col-1 font-weight-bold bg-dark text-white">Id</div>
-            <div class="col-1 font-weight-bold bg-dark text-white">Total</div>
-            <div class="col-1 font-weight-bold bg-dark text-white">Fecha</div>
-            <div class="col-1 font-weight-bold bg-dark text-white">Cliente</div>
+            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{id}">Id</div>
+            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{total}">Total</div>
+            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{fecha}">Fecha</div>
+            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{cliente}">Cliente</div>
         </div>
 
         <div th:each="pedidoComercial : ${listaPedidosComercial}" class="row justify-content-center mb-2">
@@ -75,7 +75,7 @@
 
     <div class="row justify-content-center mb-5">
         <form action="/comerciales" >
-            <input type="submit" value="Volver" class="btn btn-danger" />
+            <input type="submit" th:value="#{btnVolver}" value="Volver" class="btn btn-danger" />
         </form>
     </div>
 
