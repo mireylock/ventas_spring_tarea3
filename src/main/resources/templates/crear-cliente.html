@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle Cliente</title>
+    <title th:text="#{crearCliente}">Crear Cliente</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -57,13 +57,8 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-1">
-                <a href="/clientes" class="btn btn-danger" th:text="#{btnCancelar}">Cancelar</a>
-            </div>
-
-            <div class="col-1">
-                <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success"/>
-            </div>
+            <a href="/clientes" class="btn btn-danger mr-3" th:text="#{btnCancelar}">Cancelar</a>
+            <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success"/>
         </div>
     </form>
 </div>

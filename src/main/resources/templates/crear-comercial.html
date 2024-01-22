@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle Comercial</title>
+    <title th:text="#{crearComercial}">Crear Comercial</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -10,7 +10,6 @@
 <div class="container-fluid">
     <form th:action="@{/comerciales/crear}" th:object="${comercial}" th:method="post">
         <h1 class="row justify-content-center mb-3" th:text="#{crearComercial}">Crear Comercial</h1>
-
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="form-group">
@@ -48,13 +47,8 @@
         </div>
 
         <div class="row justify-content-center">
-            <div class="col-1">
-                <a href="/comerciales" class="btn btn-danger" th:text="#{btnCancelar}">Cancelar</a>
-            </div>
-
-            <div class="col-1">
-                <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success"/>
-            </div>
+            <a href="/comerciales" class="btn btn-danger mr-3" th:text="#{btnCancelar}">Cancelar</a>
+            <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success"/>
         </div>
     </form>
 </div>
