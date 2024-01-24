@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.OptionalDouble;
+
+import static java.util.Comparator.comparing;
 
 @Controller
 
@@ -37,6 +41,35 @@ public class ComercialController {
         //Se añaden los pedidos del comercial al detalle del comercial
         List<Pedido> listaPedidosComercial = comercialService.pedidosComercial(id);
         model.addAttribute("listaPedidosComercial", listaPedidosComercial);
+
+        //Total y media de pedidos
+        long totalPedidosComercial = listaPedidosComercial.size();
+//        model.addAttribute("totalPedidosComercial", totalPedidosComercial);
+
+        OptionalDouble optMediaPedidosComercial = listaPedidosComercial.stream()
+                .mapToDouble(p -> p.getTotal())
+                .average();
+
+        double mediaPedidosComercial = optMediaPedidosComercial.orElse(0.0);
+//        model.addAttribute("mediaPedidosComercial", mediaPedidosComercial);
+
+        //Pedido máximo
+        List<Pedido> pedidoMaximo = listaPedidosComercial.stream()
+                .sorted(comparing(Pedido::getTotal).reversed())
+                .limit(1)
+                .toList();
+        model.addAttribute("pedidoMaximo", pedidoMaximo);
+
+
+        //Pedido mínimo
+        List<Pedido> pedidoMinimo = listaPedidosComercial.stream()
+                .sorted(comparing(Pedido::getTotal))
+                .limit(1).toList();
+        model.addAttribute("pedidoMinimo", pedidoMinimo);
+
+
+
+        //Ordenados por total del cliente
 
         return "detalle-comercial";
     }

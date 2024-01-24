@@ -65,7 +65,9 @@
             <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{cliente}">Cliente</div>
         </div>
 
-        <div th:each="pedidoComercial : ${listaPedidosComercial}" class="row justify-content-center mb-2">
+        <div th:each="pedidoComercial : ${listaPedidosComercial}"
+             th:style="${pedidoComercial == pedidoMaximo.get(0) ? 'background-color: green;' : (pedidoComercial == pedidoMinimo.get(0) ? 'background-color: yellow;' : '')}"
+             class="row justify-content-center mb-2">
             <div th:text="${pedidoComercial.id}" class="col-1"></div>
             <div th:text="${pedidoComercial.total}" class="col-1"></div>
             <div th:text="${pedidoComercial.fecha}" class="col-1"></div>
