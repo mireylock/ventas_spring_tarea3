@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
+
+import static java.util.Comparator.comparing;
 
 @Service
 public class ComercialService {
@@ -70,5 +73,48 @@ public class ComercialService {
 
         return listaPedidosComercial;
     }
+
+    public long getTotalPedidosComercial (Integer id) {
+        List<Pedido> listaPedidosComercial = pedidosComercial(id);
+        return listaPedidosComercial.size();
+    }
+
+    public double mediaPedidosComercial(Integer id) {
+        List<Pedido> listaPedidosComercial = pedidosComercial(id);
+        OptionalDouble optMediaPedidosComercial = listaPedidosComercial.stream()
+                .mapToDouble(p -> p.getTotal())
+                .average();
+
+        return optMediaPedidosComercial.orElse(0.0);
+    }
+
+
+    public List<Pedido> pedidoMaximoComercial (Integer id) {
+        List<Pedido> listaPedidosComercial = pedidosComercial(id);
+
+
+        List<Pedido> pedidoMaximo = listaPedidosComercial.stream()
+                .sorted(comparing(Pedido::getTotal).reversed())
+                .limit(1)
+                .toList();
+
+        return pedidoMaximo;
+    }
+
+    public List<Pedido> pedidoMinimoComercial (Integer id) {
+        List<Pedido> listaPedidosComercial = pedidosComercial(id);
+
+
+        List<Pedido> pedidoMinimo = listaPedidosComercial.stream()
+                .sorted(comparing(Pedido::getTotal))
+                .limit(1).toList();
+
+        return pedidoMinimo;
+    }
+
+
+
+    //TODO Ordenados por total del cliente
+
 
 }

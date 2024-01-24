@@ -2,6 +2,8 @@ package org.iesvdm.ventas_spring_tarea3.controller;
 
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
+import org.iesvdm.ventas_spring_tarea3.dto.ComercialDTO;
+import org.iesvdm.ventas_spring_tarea3.mapstrut.ComercialMapper;
 import org.iesvdm.ventas_spring_tarea3.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,9 @@ public class ComercialController {
     @Autowired
     private ComercialService comercialService;
 
+    @Autowired
+    private ComercialMapper comercialMapper;
+
     @GetMapping("/comerciales")
     public String listar (Model model) {
 
@@ -41,35 +46,13 @@ public class ComercialController {
         //Se añaden los pedidos del comercial al detalle del comercial
         List<Pedido> listaPedidosComercial = comercialService.pedidosComercial(id);
         model.addAttribute("listaPedidosComercial", listaPedidosComercial);
+        List<Pedido> pedidoMaximo = comercialService.pedidoMaximoComercial(id);
 
-        //Total y media de pedidos
-        long totalPedidosComercial = listaPedidosComercial.size();
-//        model.addAttribute("totalPedidosComercial", totalPedidosComercial);
+        //        model.addAttribute("pedidoMaximo", pedidoMaximo);
+//
+//        List<Pedido> pedidoMinimo = comercialService.pedidoMinimoComercial(id);
+//        model.addAttribute("pedidoMinimo", pedidoMinimo);
 
-        OptionalDouble optMediaPedidosComercial = listaPedidosComercial.stream()
-                .mapToDouble(p -> p.getTotal())
-                .average();
-
-        double mediaPedidosComercial = optMediaPedidosComercial.orElse(0.0);
-//        model.addAttribute("mediaPedidosComercial", mediaPedidosComercial);
-
-        //Pedido máximo
-        List<Pedido> pedidoMaximo = listaPedidosComercial.stream()
-                .sorted(comparing(Pedido::getTotal).reversed())
-                .limit(1)
-                .toList();
-        model.addAttribute("pedidoMaximo", pedidoMaximo);
-
-
-        //Pedido mínimo
-        List<Pedido> pedidoMinimo = listaPedidosComercial.stream()
-                .sorted(comparing(Pedido::getTotal))
-                .limit(1).toList();
-        model.addAttribute("pedidoMinimo", pedidoMinimo);
-
-
-
-        //Ordenados por total del cliente
 
         return "detalle-comercial";
     }
