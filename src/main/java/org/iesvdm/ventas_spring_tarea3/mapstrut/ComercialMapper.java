@@ -10,11 +10,18 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ComercialMapper {
-//    @Mapping(target = "totalPedidosComercial", source = "totalPedidosComercialIn")
-//    @Mapping(target = "mediaPedidosComercial", source = "mediaPedidosComercialIn")
+    @Mapping(target = "id", source = "comercial.id")
+    @Mapping(target = "nombre", source = "comercial.nombre")
+    @Mapping(target = "apellido", source = "comercial.apellido")
+    @Mapping(target = "apellido2", source = "comercial.apellido2")
+    @Mapping(target = "comision", source = "comercial.comision")
+    @Mapping(target = "totalPedidosComercial", source = "totalPedidosComercialIn")
+    @Mapping(target = "mediaPedidosComercial", source = "mediaPedidosComercialIn")
     @Mapping(target = "pedidoMaximoComercial", source = "pedidoMaximoComercialIn")
-//    @Mapping(target = "pedidoMinimoComercial", source = "pedidoMinimoComercialIn")
-    public ComercialDTO comercialAComercialDTO (Comercial comercial, List<Pedido> pedidoMaximoComercialIn);
-    public Comercial comercialDTOAComercial (ComercialDTO comercial);
+    @Mapping(target = "pedidoMinimoComercial", source = "pedidoMinimoComercialIn")
+    public ComercialDTO comercialAComercialDTO (Comercial comercial, long totalPedidosComercialIn, double mediaPedidosComercialIn, List<Pedido> pedidoMaximoComercialIn, List<Pedido> pedidoMinimoComercialIn);
+
+
+    public Comercial comercialDTOAComercial (ComercialDTO comercialDTO);
 
 }

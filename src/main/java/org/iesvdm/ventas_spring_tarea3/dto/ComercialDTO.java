@@ -21,5 +21,5 @@ public class ComercialDTO {
     private long totalPedidosComercial;
     private double mediaPedidosComercial;
     private List<Pedido> pedidoMaximoComercial;
-    private Pedido pedidoMinimoComercial;
+    private List<Pedido> pedidoMinimoComercial;
 }

@@ -2,14 +2,17 @@ package org.iesvdm.ventas_spring_tarea3.service;
 
 import org.iesvdm.ventas_spring_tarea3.dao.ComercialDAOImpl;
 import org.iesvdm.ventas_spring_tarea3.dao.PedidoDAOImpl;
+import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalDouble;
+import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
 
@@ -104,7 +107,6 @@ public class ComercialService {
     public List<Pedido> pedidoMinimoComercial (Integer id) {
         List<Pedido> listaPedidosComercial = pedidosComercial(id);
 
-
         List<Pedido> pedidoMinimo = listaPedidosComercial.stream()
                 .sorted(comparing(Pedido::getTotal))
                 .limit(1).toList();
@@ -112,9 +114,16 @@ public class ComercialService {
         return pedidoMinimo;
     }
 
+    public  Map<Cliente, Double> totalPorCliente (Integer id) {
+        List<Pedido> listaPedidosComercial = pedidosComercial(id);
+
+        Map<Cliente, Double> totalPorCliente = listaPedidosComercial.stream()
+                .collect(Collectors.groupingBy(Pedido::getCliente, Collectors.summingDouble(Pedido::getTotal)));
+
+        return totalPorCliente;
+    }
 
 
-    //TODO Ordenados por total del cliente
 
 
 }

@@ -1,5 +1,6 @@
 package org.iesvdm.ventas_spring_tarea3.controller;
 
+import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
 import org.iesvdm.ventas_spring_tarea3.dto.ComercialDTO;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalDouble;
 
 import static java.util.Comparator.comparing;
@@ -41,18 +43,23 @@ public class ComercialController {
     @GetMapping("/comerciales/{id}")
     public String detalle (Model model, @PathVariable Integer id) {
         Comercial comercial = comercialService.detailComercial(id);
-        model.addAttribute("comercial", comercial);
+        //model.addAttribute("comercial", comercial);
 
         //Se añaden los pedidos del comercial al detalle del comercial
         List<Pedido> listaPedidosComercial = comercialService.pedidosComercial(id);
         model.addAttribute("listaPedidosComercial", listaPedidosComercial);
+
+        long totalPedidosComercial = listaPedidosComercial.size();
+        double mediaPedidosComercial = comercialService.mediaPedidosComercial(id);
         List<Pedido> pedidoMaximo = comercialService.pedidoMaximoComercial(id);
+        List<Pedido> pedidoMinimo = comercialService.pedidoMinimoComercial(id);
 
-        //        model.addAttribute("pedidoMaximo", pedidoMaximo);
-//
-//        List<Pedido> pedidoMinimo = comercialService.pedidoMinimoComercial(id);
-//        model.addAttribute("pedidoMinimo", pedidoMinimo);
 
+        ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, totalPedidosComercial, mediaPedidosComercial, pedidoMaximo, pedidoMinimo);
+        model.addAttribute("comercialDTO", comercialDTO);
+
+        Map<Cliente, Double> totalPorCliente = comercialService.totalPorCliente(id);
+        model.addAttribute("totalPorCliente", totalPorCliente);
 
         return "detalle-comercial";
     }
