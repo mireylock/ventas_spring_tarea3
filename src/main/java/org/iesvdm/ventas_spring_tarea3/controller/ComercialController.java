@@ -43,24 +43,22 @@ public class ComercialController {
     @GetMapping("/comerciales/{id}")
     public String detalle (Model model, @PathVariable Integer id) {
         Comercial comercial = comercialService.detailComercial(id);
-        //model.addAttribute("comercial", comercial);
 
-        //Se añaden los pedidos del comercial al detalle del comercial
         List<Pedido> listaPedidosComercial = comercialService.pedidosComercial(id);
 
-        if (!listaPedidosComercial.isEmpty()) {
-            model.addAttribute("listaPedidosComercial", listaPedidosComercial);
+        if (listaPedidosComercial.isEmpty()) {
+            ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, 0, 0.0, null, null, null, null);
+            model.addAttribute("comercialDTO", comercialDTO);
+        } else {
+            long totalPedidosComercial = listaPedidosComercial.size();
+            double mediaPedidosComercial = comercialService.mediaPedidosComercial(id);
+            Pedido pedidoMaximo = comercialService.pedidoMaximoComercial(id);
+            Pedido pedidoMinimo = comercialService.pedidoMinimoComercial(id);
+            Map<Cliente, Double> totalPorClienteOrdenado = comercialService.totalPorClienteOrdenado(id);
 
+            ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, totalPedidosComercial, mediaPedidosComercial, pedidoMaximo, pedidoMinimo, listaPedidosComercial, totalPorClienteOrdenado);
+            model.addAttribute("comercialDTO", comercialDTO);
         }
-
-        long totalPedidosComercial = listaPedidosComercial.size();
-        double mediaPedidosComercial = comercialService.mediaPedidosComercial(id);
-        Pedido pedidoMaximo = comercialService.pedidoMaximoComercial(id);
-        Pedido pedidoMinimo = comercialService.pedidoMinimoComercial(id);
-        Map<Cliente, Double> totalPorClienteOrdenado = comercialService.totalPorClienteOrdenado(id);
-
-        ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, totalPedidosComercial, mediaPedidosComercial, pedidoMaximo, pedidoMinimo, totalPorClienteOrdenado);
-        model.addAttribute("comercialDTO", comercialDTO);
 
 
 

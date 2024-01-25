@@ -56,8 +56,7 @@
     </div>
 
     <!-- PEDIDOS ASOCIADOS AL COMERCIAL -->
-    <div>
-
+    <div th:if="${comercialDTO.getListaPedidosComercial() != null}">
         <h2  class="row justify-content-center mb-3" th:text="#{pedidosAsociados}">Pedidos asociados</h2>
 
         <div class="row justify-content-center mb-3">
@@ -72,7 +71,7 @@
             <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{cliente}">Cliente</div>
         </div>
 
-        <div th:each="pedidoComercial : ${listaPedidosComercial}" class="row justify-content-center mb-3">
+        <div th:each="pedidoComercial : ${comercialDTO.getListaPedidosComercial()}" class="row justify-content-center mb-3">
             <div th:text="${pedidoComercial.id}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></div>
             <div th:text="${#numbers.formatDecimal(pedidoComercial.total, 1, 'DEFAULT', 2, 'DEFAULT')+'€'}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></div>
             <div th:text="${pedidoComercial.fecha}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></div>
@@ -81,7 +80,7 @@
     </div>
 
     <!-- PEDIDOS ORDENADOS POR TOTAL DEL CLIENTE -->
-    <div>
+    <div th:if="${comercialDTO.getListaPedidosComercial() != null}">
         <h2  class="row justify-content-center mb-3" th:text="#{clientesPorMaxtotal}">Clientes por mayor total</h2>
 
         <div class="row justify-content-center mb-3">

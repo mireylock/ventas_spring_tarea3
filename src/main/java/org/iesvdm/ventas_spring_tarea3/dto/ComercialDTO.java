@@ -24,6 +24,9 @@ public class ComercialDTO {
     private double mediaPedidosComercial;
     private Pedido pedidoMaximoComercial;
     private Pedido pedidoMinimoComercial;
+    private List<Pedido> listaPedidosComercial;
     private Map<Cliente, Double> totalPorClienteOrdenado;
+
+
 
 }

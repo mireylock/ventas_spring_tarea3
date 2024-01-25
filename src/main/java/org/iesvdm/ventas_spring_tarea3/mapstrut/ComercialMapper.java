@@ -18,10 +18,9 @@ public interface ComercialMapper {
     @Mapping(target = "mediaPedidosComercial", source = "mediaPedidosComercialIn")
     @Mapping(target = "pedidoMaximoComercial", source = "pedidoMaximoComercialIn")
     @Mapping(target = "pedidoMinimoComercial", source = "pedidoMinimoComercialIn")
+    @Mapping(target = "listaPedidosComercial", source = "listaPedidosComercialIn")
     @Mapping(target = "totalPorClienteOrdenado", source = "totalPorClienteOrdenadoIn")
-    public ComercialDTO comercialAComercialDTO (Comercial comercial, long totalPedidosComercialIn, double mediaPedidosComercialIn, Pedido pedidoMaximoComercialIn, Pedido pedidoMinimoComercialIn, Map<Cliente, Double> totalPorClienteOrdenadoIn);
-
-
+    public ComercialDTO comercialAComercialDTO (Comercial comercial, long totalPedidosComercialIn, double mediaPedidosComercialIn, Pedido pedidoMaximoComercialIn, Pedido pedidoMinimoComercialIn, List<Pedido> listaPedidosComercialIn, Map<Cliente, Double> totalPorClienteOrdenadoIn);
 
     public Comercial comercialDTOAComercial (ComercialDTO comercialDTO);
 
