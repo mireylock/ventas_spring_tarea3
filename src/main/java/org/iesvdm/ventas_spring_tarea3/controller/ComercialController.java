@@ -47,19 +47,22 @@ public class ComercialController {
 
         //Se añaden los pedidos del comercial al detalle del comercial
         List<Pedido> listaPedidosComercial = comercialService.pedidosComercial(id);
-        model.addAttribute("listaPedidosComercial", listaPedidosComercial);
+
+        if (!listaPedidosComercial.isEmpty()) {
+            model.addAttribute("listaPedidosComercial", listaPedidosComercial);
+
+        }
 
         long totalPedidosComercial = listaPedidosComercial.size();
         double mediaPedidosComercial = comercialService.mediaPedidosComercial(id);
-        List<Pedido> pedidoMaximo = comercialService.pedidoMaximoComercial(id);
-        List<Pedido> pedidoMinimo = comercialService.pedidoMinimoComercial(id);
+        Pedido pedidoMaximo = comercialService.pedidoMaximoComercial(id);
+        Pedido pedidoMinimo = comercialService.pedidoMinimoComercial(id);
+        Map<Cliente, Double> totalPorClienteOrdenado = comercialService.totalPorClienteOrdenado(id);
 
-
-        ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, totalPedidosComercial, mediaPedidosComercial, pedidoMaximo, pedidoMinimo);
+        ComercialDTO comercialDTO = comercialMapper.comercialAComercialDTO(comercial, totalPedidosComercial, mediaPedidosComercial, pedidoMaximo, pedidoMinimo, totalPorClienteOrdenado);
         model.addAttribute("comercialDTO", comercialDTO);
 
-        Map<Cliente, Double> totalPorCliente = comercialService.totalPorCliente(id);
-        model.addAttribute("totalPorCliente", totalPorCliente);
+
 
         return "detalle-comercial";
     }

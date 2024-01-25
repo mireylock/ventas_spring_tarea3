@@ -57,7 +57,13 @@
 
     <!-- PEDIDOS ASOCIADOS AL COMERCIAL -->
     <div>
+
         <h2  class="row justify-content-center mb-3" th:text="#{pedidosAsociados}">Pedidos asociados</h2>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-1 bg-success" th:text="#{pedidoMax}">Pedido Maximo</div>
+            <div class="col-1 bg-warning" th:text="#{pedidoMin}">Pedido Mínimo</div>
+        </div>
 
         <div class="row justify-content-center mb-3">
             <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{id}">Id</div>
@@ -66,13 +72,11 @@
             <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{cliente}">Cliente</div>
         </div>
 
-        <div th:each="pedidoComercial : ${listaPedidosComercial}"
-             th:style="${pedidoComercial == comercialDTO.getPedidoMaximoComercial().get(0) ? 'background-color: green;' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial().get(0) ? 'background-color: yellow;' : '')}"
-             class="row justify-content-center mb-2">
-            <div th:text="${pedidoComercial.id}" class="col-1"></div>
-            <div th:text="${pedidoComercial.total}" class="col-1"></div>
-            <div th:text="${pedidoComercial.fecha}" class="col-1"></div>
-            <a th:href="@{/clientes/__${pedidoComercial.getCliente().getId()}__}" th:text="${pedidoComercial.getCliente().getNombre()}" class="col-1"></a>
+        <div th:each="pedidoComercial : ${listaPedidosComercial}" class="row justify-content-center mb-3">
+            <div th:text="${pedidoComercial.id}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></div>
+            <div th:text="${#numbers.formatDecimal(pedidoComercial.total, 1, 'DEFAULT', 2, 'DEFAULT')+'€'}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></div>
+            <div th:text="${pedidoComercial.fecha}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></div>
+            <a th:href="@{/clientes/__${pedidoComercial.getCliente().getId()}__}" th:text="${pedidoComercial.getCliente().getNombre()}" th:class="${pedidoComercial == comercialDTO.getPedidoMaximoComercial() ? 'bg-success col-1' : (pedidoComercial == comercialDTO.getPedidoMinimoComercial() ? 'bg-warning col-1' : 'col-1')}"></a>
         </div>
     </div>
 
@@ -85,9 +89,9 @@
             <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{total}">Total</div>
         </div>
 
-        <div th:each="entry : ${totalPorCliente.entrySet()}" class="row justify-content-center mb-2">
+        <div th:each="entry : ${comercialDTO.getTotalPorClienteOrdenado().entrySet()}" class="row justify-content-center mb-2">
             <div th:text="${entry.key.getNombre()}" class="col-1"></div>
-            <div th:text="${entry.value}" class="col-1"></div>
+            <div th:text="${#numbers.formatDecimal(entry.value, 1, 'DEFAULT', 2, 'DEFAULT')}+'€'" class="col-1"></div>
         </div>
     </div>
 

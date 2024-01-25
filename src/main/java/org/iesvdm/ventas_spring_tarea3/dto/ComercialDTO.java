@@ -2,10 +2,12 @@ package org.iesvdm.ventas_spring_tarea3.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @AllArgsConstructor
@@ -20,6 +22,8 @@ public class ComercialDTO {
     //El DTO añade
     private long totalPedidosComercial;
     private double mediaPedidosComercial;
-    private List<Pedido> pedidoMaximoComercial;
-    private List<Pedido> pedidoMinimoComercial;
+    private Pedido pedidoMaximoComercial;
+    private Pedido pedidoMinimoComercial;
+    private Map<Cliente, Double> totalPorClienteOrdenado;
+
 }

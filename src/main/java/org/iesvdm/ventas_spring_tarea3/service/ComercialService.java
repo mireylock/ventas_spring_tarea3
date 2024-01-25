@@ -8,10 +8,7 @@ import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.OptionalDouble;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static java.util.Comparator.comparing;
@@ -92,35 +89,43 @@ public class ComercialService {
     }
 
 
-    public List<Pedido> pedidoMaximoComercial (Integer id) {
+    public Pedido pedidoMaximoComercial (Integer id) {
         List<Pedido> listaPedidosComercial = pedidosComercial(id);
 
 
-        List<Pedido> pedidoMaximo = listaPedidosComercial.stream()
+        Pedido pedidoMaximo = listaPedidosComercial.stream()
                 .sorted(comparing(Pedido::getTotal).reversed())
                 .limit(1)
-                .toList();
+                .toList().get(0);
 
         return pedidoMaximo;
     }
 
-    public List<Pedido> pedidoMinimoComercial (Integer id) {
+    public Pedido pedidoMinimoComercial (Integer id) {
         List<Pedido> listaPedidosComercial = pedidosComercial(id);
 
-        List<Pedido> pedidoMinimo = listaPedidosComercial.stream()
+        Pedido pedidoMinimo = listaPedidosComercial.stream()
                 .sorted(comparing(Pedido::getTotal))
-                .limit(1).toList();
+                .limit(1)
+                .toList().get(0);
 
         return pedidoMinimo;
     }
 
-    public  Map<Cliente, Double> totalPorCliente (Integer id) {
+    public  Map<Cliente, Double> totalPorClienteOrdenado (Integer id) {
         List<Pedido> listaPedidosComercial = pedidosComercial(id);
 
-        Map<Cliente, Double> totalPorCliente = listaPedidosComercial.stream()
-                .collect(Collectors.groupingBy(Pedido::getCliente, Collectors.summingDouble(Pedido::getTotal)));
+        Map<Cliente, Double> totalPorClienteOrdenado = listaPedidosComercial.stream()
+                //Mete en el map el cliente y el total de la suma de sus pedidos con summingDouble
+                .collect(Collectors.groupingBy(Pedido::getCliente, Collectors.summingDouble(Pedido::getTotal)))
+                //Ordena según los valores con comparingByValue (de mayor a menor porque es reversed())
+                .entrySet().stream()
+                .sorted(Map.Entry.<Cliente, Double>comparingByValue().reversed())
+                //Usa el orden de los values para guardar el mapa con LinkedHasMap::new (nuevo mapa que siga ese orden)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (e1, e2) -> e1, LinkedHashMap::new));
 
-        return totalPorCliente;
+        return totalPorClienteOrdenado;
     }
 
 
