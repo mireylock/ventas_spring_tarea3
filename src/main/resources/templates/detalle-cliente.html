@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div class="container-fluid" >
+<div class="container-fluid mt-3 mb-3" >
     <h1 class="row justify-content-center mb-3" th:text="#{detalleCliente}">Detalle Cliente</h1>
 
     <div class="row justify-content-center">
@@ -65,48 +65,53 @@
     </div>
 
     <!-- COMERCIALES ASOCIADOS AL CLIENTE CON CONTEO DE PEDIDOS -->
-    <div>
-        <h2  class="row justify-content-center mb-3" th:text="#{pedidosAsociados}">Pedidos asociados</h2>
+    <div class="container mt-4">
+        <h2 class="text-center mb-3" th:text="#{totalPedidosClientePorComercial}">Total pedidos por comercial</h2>
 
         <div class="row justify-content-center mb-3">
-            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{comerciales}">Comerciales</div>
-            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{pedidosRealizados}">Pedidos Realizados</div>
+            <div class="col-3 font-weight-bold bg-dark text-white text-center" th:text="#{comercial}">Comercial</div>
+            <div class="col-3 font-weight-bold bg-dark text-white text-center" th:text="#{pedidosRealizados}">Pedidos Realizados</div>
         </div>
 
         <div th:each="entry : ${clienteDTO.getComercialesConteoPedidos().entrySet()}" class="row justify-content-center mb-2">
-            <div th:text="${entry.key.getNombre()}" class="col-1"></div>
-            <div th:text="${entry.value}" class="col-1"></div>
-        </div>
-
-        <div class="row justify-content-center mb-3">
-            <div class="col-1" th:text="#{pedidosTrimestre}">Pedidos en el último trimestre</div>
-            <div class="col-1" th:text="${clienteDTO.getPedidosTrimestre()}">1</div>
-        </div>
-
-
-        <div class="row justify-content-center mb-3">
-            <div class="col-1" th:text="#{pedidosSemestre}">Pedidos en el último Semestre</div>
-            <div class="col-1" th:text="${clienteDTO.getPedidosSemestre()}">1</div>
-        </div>
-
-
-        <div class="row justify-content-center mb-3">
-            <div class="col-1" th:text="#{pedidosAnio}">Pedidos en el último año</div>
-            <div class="col-1" th:text="${clienteDTO.getPedidosAnio()}">1</div>
-        </div>
-
-
-        <div class="row justify-content-center mb-3">
-            <div class="col-1" th:text="#{pedidosLustro}">Pedidos en el último lustro</div>
-            <div class="col-1" th:text="${clienteDTO.getPedidosLustro()}">1</div>
+            <div th:text="${entry.key.getNombre()}" class="col-3 text-center"></div>
+            <div th:text="${entry.value}" class="col-3 text-center"></div>
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <!-- ESTADÍSTICAS DE PEDIDOS -->
+    <div class="container mt-5">
+        <h2 class="text-center mb-3" th:text="#{estadisticasPedidos}">Estadísticas de pedido</h2>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-3 text-center" th:text="#{pedidosTrimestre}">Pedidos en el último trimestre</div>
+            <div class="col-3 text-center" th:text="${clienteDTO.getPedidosTrimestre()}">1</div>
+        </div>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-3 text-center" th:text="#{pedidosSemestre}">Pedidos en el último Semestre</div>
+            <div class="col-3 text-center" th:text="${clienteDTO.getPedidosSemestre()}">1</div>
+        </div>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-3 text-center" th:text="#{pedidosAnio}">Pedidos en el último año</div>
+            <div class="col-3 text-center" th:text="${clienteDTO.getPedidosAnio()}">1</div>
+        </div>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-3 text-center" th:text="#{pedidosLustro}">Pedidos en el último lustro</div>
+            <div class="col-3 text-center" th:text="${clienteDTO.getPedidosLustro()}">1</div>
+        </div>
+    </div>
+
+
+    <!-- BOTÓN VOLVER -->
+    <div class="row justify-content-center mt-3">
         <form action="/clientes" >
             <input type="submit" th:value="#{btnVolver}" value="Volver" class="btn btn-danger" />
         </form>
     </div>
+
 
 </div>
 

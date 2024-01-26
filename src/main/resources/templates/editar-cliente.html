@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container-fluid" >
+<div class="container-fluid mt-3 mb-3" >
 
     <form th:action="@{/clientes/editar/__${cliente.id}__}" th:object="${cliente}" th:method="post" >
         <h1 class="row justify-content-center mb-3" th:text="#{editarCliente}">Editar Cliente</h1>
