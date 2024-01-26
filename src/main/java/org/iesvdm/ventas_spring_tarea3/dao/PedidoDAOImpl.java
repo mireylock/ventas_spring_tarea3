@@ -32,7 +32,7 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
                         """, Statement.RETURN_GENERATED_KEYS);
             int idx = 1;
             ps.setDouble(idx++, pedido.getTotal());
-            ps.setDate(idx++, new java.sql.Date(pedido.getFecha().getTime()));
+            ps.setDate(idx++, new java.sql.Date(pedido.getFecha().getYear()));//Esto habría que cambiarlo
             ps.setInt(idx++, pedido.getCliente().getId());
             ps.setInt(idx++, pedido.getComercial().getId());
             return ps;
@@ -92,5 +92,16 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
                 """, (rs, rowNum) -> UtilDAO.newPedido(rs), idComercial);
 
        return listaPedidosComercial;
+    }
+
+    @Override
+    public List<Pedido> findByIdCliente(int idCliente) {
+        List<Pedido> listaPedidosCliente = this.jdbcTemplate.query("""
+                   SELECT * FROM  pedido P join cliente C on P.id_cliente = C.id 
+                   join comercial CO on P.id_comercial = CO.id
+                   WHERE C.id = ?
+                """, (rs, rowNum) -> UtilDAO.newPedido(rs), idCliente);
+
+        return listaPedidosCliente;
     }
 }

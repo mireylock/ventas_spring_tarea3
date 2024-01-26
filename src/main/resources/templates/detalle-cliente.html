@@ -14,7 +14,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="id" th:text="#{id}">Id</label>
-                <input type="text" class="form-control" id="id" th:value="${cliente.id}" value="id" readonly="readonly"/>
+                <input type="text" class="form-control" id="id" th:value="${clienteDTO.id}" value="id" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="nombre" th:text="#{nombre}">Nombre</label>
-                <input type="text" class="form-control" id="nombre" th:value="${cliente.nombre}" value="Cliente" readonly="readonly"/>
+                <input type="text" class="form-control" id="nombre" th:value="${clienteDTO.nombre}" value="Cliente" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="apellido" th:text="#{apellido1}">Apellido1</label>
-                <input type="text" class="form-control" id="apellido" th:value="${cliente.apellido}" value="Apellido1" readonly="readonly"/>
+                <input type="text" class="form-control" id="apellido" th:value="${clienteDTO.apellido}" value="Apellido1" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
-                <input type="text" class="form-control" id="apellido2" th:value="${cliente.apellido2}" value="Apellido2" readonly="readonly"/>
+                <input type="text" class="form-control" id="apellido2" th:value="${clienteDTO.apellido2}" value="Apellido2" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="ciudad" th:text="#{ciudad}">Ciudad</label>
-                <input type="text" class="form-control" id="ciudad" th:value="${cliente.ciudad}" value="Ciudad" readonly="readonly"/>
+                <input type="text" class="form-control" id="ciudad" th:value="${clienteDTO.ciudad}" value="Ciudad" readonly="readonly"/>
             </div>
         </div>
     </div>
@@ -59,8 +59,46 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label for="categoria" th:text="#{categoria}">Categoría</label>
-                <input type="text" class="form-control" id="categoria" th:value="${cliente.categoria}" value="Categoria" readonly="readonly"/>
+                <input type="text" class="form-control" id="categoria" th:value="${clienteDTO.categoria}" value="Categoria" readonly="readonly"/>
             </div>
+        </div>
+    </div>
+
+    <!-- COMERCIALES ASOCIADOS AL CLIENTE CON CONTEO DE PEDIDOS -->
+    <div>
+        <h2  class="row justify-content-center mb-3" th:text="#{pedidosAsociados}">Pedidos asociados</h2>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{comerciales}">Comerciales</div>
+            <div class="col-1 font-weight-bold bg-dark text-white" th:text="#{pedidosRealizados}">Pedidos Realizados</div>
+        </div>
+
+        <div th:each="entry : ${clienteDTO.getComercialesConteoPedidos().entrySet()}" class="row justify-content-center mb-2">
+            <div th:text="${entry.key.getNombre()}" class="col-1"></div>
+            <div th:text="${entry.value}" class="col-1"></div>
+        </div>
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-1" th:text="#{pedidosTrimestre}">Pedidos en el último trimestre</div>
+            <div class="col-1" th:text="${clienteDTO.getPedidosTrimestre()}">1</div>
+        </div>
+
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-1" th:text="#{pedidosSemestre}">Pedidos en el último Semestre</div>
+            <div class="col-1" th:text="${clienteDTO.getPedidosSemestre()}">1</div>
+        </div>
+
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-1" th:text="#{pedidosAnio}">Pedidos en el último año</div>
+            <div class="col-1" th:text="${clienteDTO.getPedidosAnio()}">1</div>
+        </div>
+
+
+        <div class="row justify-content-center mb-3">
+            <div class="col-1" th:text="#{pedidosLustro}">Pedidos en el último lustro</div>
+            <div class="col-1" th:text="${clienteDTO.getPedidosLustro()}">1</div>
         </div>
     </div>
 

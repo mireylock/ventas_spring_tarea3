@@ -1,6 +1,9 @@
 package org.iesvdm.ventas_spring_tarea3.controller;
 
 import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
+import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
+import org.iesvdm.ventas_spring_tarea3.dto.ClienteDTO;
+import org.iesvdm.ventas_spring_tarea3.mapstrut.ClienteMapper;
 import org.iesvdm.ventas_spring_tarea3.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,11 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
+
+    @Autowired
+    private ClienteMapper clienteMapper;
 
     @GetMapping("/clientes")
     public String listar (Model model) {
@@ -30,7 +37,16 @@ public class ClienteController {
     @GetMapping("/clientes/{id}")
     public String detalle (Model model, @PathVariable Integer id) {
         Cliente cliente = clienteService.detailCliente(id);
-        model.addAttribute("cliente", cliente);
+
+        Map<Comercial, Long> comercialesConteoPedidos = clienteService.comercialesConteoPedidos(id);
+        Long pedidosTrimestre = clienteService.pedidosTrimestre(id);
+        Long pedidosSemestre = clienteService.pedidosSemestre(id);
+        Long pedidosAnio = clienteService.pedidosAnio(id);
+        Long pedidosLustro = clienteService.pedidosLustro(id);
+
+        ClienteDTO clienteDTO = clienteMapper.clienteAClienteDTO(cliente, comercialesConteoPedidos, pedidosTrimestre, pedidosSemestre, pedidosAnio, pedidosLustro);
+
+        model.addAttribute("clienteDTO", clienteDTO);
 
         return "detalle-cliente";
     }

@@ -27,6 +27,4 @@ public class ComercialDTO {
     private List<Pedido> listaPedidosComercial;
     private Map<Cliente, Double> totalPorClienteOrdenado;
 
-
-
 }

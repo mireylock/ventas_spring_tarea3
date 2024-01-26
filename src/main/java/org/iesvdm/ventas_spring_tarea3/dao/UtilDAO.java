@@ -12,7 +12,7 @@ public class UtilDAO {
     public static Pedido newPedido(ResultSet rs) throws SQLException {
         return new org.iesvdm.ventas_spring_tarea3.domain.Pedido(rs.getInt("id"),
                 rs.getDouble("total"),
-                rs.getDate("fecha"),
+                rs.getDate("fecha").toLocalDate(),
                 new Cliente(rs.getInt("C.id"),
                         rs.getString("C.nombre"),
                         rs.getString("C.apellido1"),
