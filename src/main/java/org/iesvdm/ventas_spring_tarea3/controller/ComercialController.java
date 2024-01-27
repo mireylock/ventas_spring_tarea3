@@ -1,5 +1,6 @@
 package org.iesvdm.ventas_spring_tarea3.controller;
 
+import jakarta.validation.Valid;
 import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
@@ -9,6 +10,7 @@ import org.iesvdm.ventas_spring_tarea3.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,11 +62,8 @@ public class ComercialController {
             model.addAttribute("comercialDTO", comercialDTO);
         }
 
-
-
         return "detalle-comercial";
     }
-
 
     @GetMapping("/comerciales/crear")
     public String crear (Model model) {
@@ -76,11 +75,17 @@ public class ComercialController {
     }
 
     @PostMapping("/comerciales/crear")
-    public RedirectView submitCrear (@ModelAttribute("comercial") Comercial comercial) {
-        comercialService.createComercial(comercial);
+    public String submitCrear (@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("comercial", comercial);
+            return "crear-comercial";
+        }
 
+        comercialService.createComercial(comercial);
+        List<Comercial> listaComerciales = comercialService.listAll();
+        model.addAttribute("listaComerciales", listaComerciales);
         //Devuelve al listado con to dos los comerciales tras crear un nuevo comercial
-        return new RedirectView("/comerciales");
+        return "/comerciales";
     }
 
     @GetMapping("/comerciales/editar/{id}")
@@ -92,11 +97,16 @@ public class ComercialController {
     }
 
     @PostMapping("/comerciales/editar/{id}")
-    public RedirectView submitEditar(@ModelAttribute("comercial") Comercial comercial) {
+    public String submitEditar(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("comercial", comercial);
+            return "comerciales-editar";
+        }
         comercialService.replaceComercial(comercial);
-
+        List<Comercial> listaComerciales = comercialService.listAll();
+        model.addAttribute("listaComerciales", listaComerciales);
         //Devuelve al listado con to dos los comerciales tras editar un comercial
-        return new RedirectView("/comerciales");
+        return "/comerciales";
     }
 
     @PostMapping("/comerciales/borrar/{id}")

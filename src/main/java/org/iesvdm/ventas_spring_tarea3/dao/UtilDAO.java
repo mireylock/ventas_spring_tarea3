@@ -24,7 +24,7 @@ public class UtilDAO {
                         rs.getString("CO.nombre"),
                         rs.getString("CO.apellido1"),
                         rs.getString("CO.apellido2"),
-                        rs.getFloat("CO.comisión")
+                        rs.getBigDecimal("CO.comisión")
                 )
         );
     }
@@ -44,7 +44,7 @@ public class UtilDAO {
                 rs.getString("nombre"),
                 rs.getString("apellido1"),
                 rs.getString("apellido2"),
-                rs.getFloat("comisión")
+                rs.getBigDecimal("comisión")
         );
     }
 }

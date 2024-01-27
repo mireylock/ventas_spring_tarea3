@@ -7,14 +7,12 @@
 </head>
 <body>
 <div class="container-fluid mt-3 mb-3">
-    <div class="row justify-content-end pr-3 pt-3">
-        <div>
-            <span class="font-weight-bold" th:text="#{lang.cambio}">Cambiar idioma</span>:
-            <select id="locales">
-                <option value="es" th:text="#{lang.espaniol}">Español</option>
-                <option value="en" th:text="#{lang.ingles}">Inglés</option>
-            </select>
-        </div>
+    <div class="container bg-white">
+        <span class="font-weight-bold" th:text="#{lang.cambio}">Cambiar idioma</span>:
+        <select id="locales">
+            <option value="es" th:text="#{lang.espaniol}">Español</option>
+            <option value="en" th:text="#{lang.ingles}">Inglés</option>
+        </select>
     </div>
 
     <h1 class="row justify-content-center mb-3" th:text="#{comerciales}">Comerciales</h1>
@@ -22,52 +20,58 @@
         <input type="submit" th:value="#{btnCrear}" value="Crear" class="btn btn-success">
     </form>
 
-    <div class="row mb-3 font-weight-bold bg-dark text-white">
-        <div class="col-1" th:text="#{id}">Id</div>
-        <div class="col-1" th:text="#{nombre}">Nombre</div>
-        <div class="col-1" th:text="#{apellido1}">Apellido1</div>
-        <div class="col-1" th:text="#{apellido2}">Apellido2</div>
-        <div class="col-1" th:text="#{comision}">Comisión</div>
-    </div>
+    <div class="container bg-light">
+        <div class="row mb-2 font-weight-bold bg-dark text-white">
+            <div  class="col-md-1 align-self-center h6" th:text="#{id}">Id</div>
+            <div  class="col-md-1 align-self-center h6" th:text="#{nombre}">Nombre</div>
+            <div  class="col-md-1 align-self-center h6" th:text="#{apellido1}">Apellido1</div>
+            <div  class="col-md-1 align-self-center h6" th:text="#{apellido2}">Apellido2</div>
+            <div  class="col-md-1 align-self-center h6" th:text="#{comision}">Comisión</div>
+        </div>
 
-    <div  th:each="comercial : ${listaComerciales}" class="row mb-2">
-        <div th:text="${comercial.id}" class="col-1">Id</div>
-        <div th:text="${comercial.nombre}" class="col-1">Nombre</div>
-        <div th:text="${comercial.apellido}" class="col-1">Apellido1</div>
-        <div th:text="${comercial.apellido2}" class="col-1">Apellido2</div>
-        <div th:text="${comercial.comision}" class="col-1">Comisión</div>
+        <div class="row mb-2" th:each="comercial : ${listaComerciales}">
+            <div th:text="${comercial.id}"  class="col-md-1 align-self-center">Id</div>
+            <div th:text="${comercial.nombre}"  class="col-md-1 align-self-center">Nombre</div>
+            <div th:text="${comercial.apellido}"  class="col-md-1 align-self-center">Apellido1</div>
+            <div th:text="${comercial.apellido2}"  class="col-md-1 align-self-center">Apellido2</div>
+            <div th:text="${comercial.comision}"  class="col-md-1 align-self-center">Comisión</div>
 
-        <form th:action="@{/comerciales/__${comercial.id}__}" class="col-2">
-            <input type="submit" th:value="#{btnVerDetalle}" value="Ver Detalle" class="btn btn-primary"/>
-        </form>
+            <div class="col-md-5 align-self-center text-center">
+                <form class="d-inline" th:action="@{/comerciales/__${comercial.id}__}">
+                    <input type="submit" th:value="#{btnVerDetalle}" value="Ver Detalle" class="btn btn-primary"/>
+                </form>
 
-        <form th:action="@{/comerciales/editar/__${comercial.id}__}" class="col-2">
-            <input type="submit" th:value="#{btnEditar}" value="Editar" class="btn btn-info"/>
-        </form>
+                <form class="d-inline" th:action="@{/comerciales/editar/__${comercial.id}__}">
+                    <input type="submit" th:value="#{btnEditar}" value="Editar" class="btn btn-info"/>
+                </form>
 
-        <!-- Botón para el modal de alerta de eliminación-->
-        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${comercial.id}" th:text="#{btnEliminar}">Eliminar</button>
+                <form class="d-inline">
+                    <!-- Botón para el modal de alerta de eliminación-->
+                    <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#confirmDeleteModal_' + ${comercial.id}" th:text="#{btnEliminar}">Eliminar</button>
 
-        <!-- Modal -->
-        <div class="modal fade" th:id="'confirmDeleteModal_' + ${comercial.id}"  tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden>
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="confirmDeleteModalLabel" th:text="#{confirmElim}"></h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                    <!-- Modal -->
+                    <div class="modal fade" th:id="'confirmDeleteModal_' + ${comercial.id}"  tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden>
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmDeleteModalLabel" th:text="#{confirmElim}"></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <span th:text="#{msgConfirmElim}+' '+${comercial.id}+' ('+${comercial.nombre}+' '+${comercial.apellido}+(${comercial.apellido2}?' '+${comercial.apellido2}:'')+')'"></span>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{btnCancelar}">Cancelar</button>
+                                    <form th:action="@{/comerciales/borrar/__${comercial.id}__}" method="post">
+                                        <button type="submit" class="btn btn-danger" th:text="#{btnEliminar}">Eliminar</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <span th:text="#{msgConfirmElim}+' '+${comercial.id}+' ('+${comercial.nombre}+' '+${comercial.apellido}+(${comercial.apellido2}?' '+${comercial.apellido2}:'')+')'"></span>?
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" th:text="#{btnCancelar}">Cancelar</button>
-                        <form th:action="@{/comerciales/borrar/__${comercial.id}__}" method="post">
-                            <button type="submit" class="btn btn-danger" th:text="#{btnEliminar}">Eliminar</button>
-                        </form>
-                    </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

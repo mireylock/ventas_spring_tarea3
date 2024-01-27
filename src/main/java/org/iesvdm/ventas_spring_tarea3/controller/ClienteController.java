@@ -1,5 +1,6 @@
 package org.iesvdm.ventas_spring_tarea3.controller;
 
+import jakarta.validation.Valid;
 import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.dto.ClienteDTO;
@@ -8,6 +9,7 @@ import org.iesvdm.ventas_spring_tarea3.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,11 +63,18 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes/crear")
-    public RedirectView submitCrear (@ModelAttribute("cliente") Cliente cliente) {
+    public String submitCrear (@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("cliente", cliente);
+
+            return "crear-cliente";
+        }
         clienteService.createCliente(cliente);
+        List<Cliente> listaClientes = clienteService.listAll();
+        model.addAttribute("listaClientes", listaClientes);
 
         //Devuelve al listado con to dos los clientes tras crear un nuevo cliente
-        return new RedirectView("/clientes");
+        return "/clientes";
     }
 
     @GetMapping("/clientes/editar/{id}")
@@ -77,11 +86,16 @@ public class ClienteController {
     }
 
     @PostMapping("/clientes/editar/{id}")
-    public RedirectView submitEditar(@ModelAttribute("cliente") Cliente cliente) {
+    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("cliente", cliente);
+            return "editar-cliente";
+        }
         clienteService.replaceCliente(cliente);
-
+        List<Cliente> listaClientes = clienteService.listAll();
+        model.addAttribute("listaClientes", listaClientes);
         //Devuelve al listado con to dos los clientes tras editar un cliente
-        return new RedirectView("/clientes");
+        return "/clientes";
     }
 
     @PostMapping("/clientes/borrar/{id}")

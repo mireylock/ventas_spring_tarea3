@@ -1,65 +1,77 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title  th:text="#{editarComercial}">Editar Comercial</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <title th:text="#{editarComercial}">Editar Comercial</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container-fluid mt-3 mb-3" >
+<div class="container-fluid mt-3 mb-3">
+    <form th:action="@{/comerciales/editar/__${comercial.id}__}" th:object="${comercial}" th:method="post">
+        <h1 class="row justify-content-center mb-3" th:text="#{editarComercial}">Editar Comercial</h1>
 
-  <form th:action="@{/comerciales/editar/__${comercial.id}__}" th:object="${comercial}" th:method="post" >
-    <h1 class="row justify-content-center mb-3" th:text="#{editarComercial}">Editar Comercial</h1>
-
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="id" th:text="#{id}">Id</label>
-          <input type="text" class="form-control" id="id" th:field="*{id}" value="id" readonly="readonly"/>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="id" th:text="#{id}">Id</label>
+                    <input type="text" class="form-control" id="id" th:field="*{id}" value="id" readonly="readonly"/>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="nombre" th:text="#{nombre}">Nombre</label>
-          <input type="text" class="form-control" id="nombre" th:field="*{nombre}" value="Comercial" />
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="nombre" th:text="#{nombre}">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}" th:field="*{nombre}" value="Comercial"/>
+                    <span class="text-danger " th:if="${#fields.hasErrors('apellido')}">
+                        <li th:each="err : ${#fields.errors('apellido')}" th:text="${err}"/>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="apellido" th:text="#{apellido1}">Apellido1</label>
-          <input type="text" class="form-control" id="apellido" th:field="*{apellido}" value="Apellido1" />
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="apellido" th:text="#{apellido1}">Apellido1</label>
+                    <input type="text" class="form-control" id="apellido" th:classappend="${#fields.hasErrors('apellido')?'is-invalid':''}" th:field="*{apellido}" value="Apellido1"/>
+                    <span class="text-danger " th:if="${#fields.hasErrors('apellido')}">
+                        <li th:each="err : ${#fields.errors('apellido')}" th:text="${err}"/>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
-          <input type="text" class="form-control" id="apellido2" th:field="*{apellido2}" value="Apellido2" />
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
+                    <input type="text" class="form-control" id="apellido2" th:classappend="${#fields.hasErrors('apellido2')?'is-invalid':''}" th:field="*{apellido2}" value="Apellido2"/>
+                    <span class="text-danger " th:if="${#fields.hasErrors('apellido2')}">
+                        <li th:each="err : ${#fields.errors('apellid2o')}" th:text="${err}"/>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row justify-content-center">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="comision" th:text="#{comision}">Comisión</label>
-          <input type="text" class="form-control" id="comision" th:field="*{comision}" value="Comision" />
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="comision" th:text="#{comision}">Comisión</label>
+                    <input type="text" class="form-control" id="comision" th:classappend="${#fields.hasErrors('comision')?'is-invalid':''}" th:field="*{comision}" value="Comision"/>
+                    <span class="text-danger " th:if="${#fields.hasErrors('comision')}">
+                        <li th:each="err : ${#fields.errors('comision')}" th:text="${err}"/>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div class="row justify-content-center">
-      <a href="/comerciales" class="btn btn-danger mr-3" th:text="#{btnCancelar}">Cancelar</a>
-      <input type="submit" th:value="#{btnGuardar}" value="Guardar" class="btn btn-success"/>
-    </div>
+        <div class="row justify-content-center">
+            <a href="/comerciales" class="btn btn-danger mr-3" th:text="#{btnCancelar}">Cancelar</a>
+            <input type="submit" th:value="#{btnGuardar}" value="Guardar" class="btn btn-success"/>
+        </div>
+    </form>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

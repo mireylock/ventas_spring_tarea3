@@ -34,7 +34,7 @@ public class ComercialDAOImpl implements RepositoryBase<Comercial> {
             ps.setString(idx++, comercial.getNombre());
             ps.setString(idx++, comercial.getApellido());
             ps.setString(idx++, comercial.getApellido2());
-            ps.setFloat(idx++, comercial.getComision());
+            ps.setBigDecimal(idx++, comercial.getComision());
             return ps;
         }, keyHolder);
 
@@ -69,7 +69,7 @@ public class ComercialDAOImpl implements RepositoryBase<Comercial> {
                         rs.getString("nombre"),
                         rs.getString("apellido1"),
                         rs.getString("apellido2"),
-                        rs.getFloat("comisión")
+                        rs.getBigDecimal("comisión")
                 ));
 
         return listCom;
@@ -83,7 +83,7 @@ public class ComercialDAOImpl implements RepositoryBase<Comercial> {
                                 rs.getString("nombre"),
                                 rs.getString("apellido1"),
                                 rs.getString("apellido2"),
-                                rs.getFloat("comisión"))
+                                rs.getBigDecimal("comisión"))
                         , id);
 
         return Optional.of(com);

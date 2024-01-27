@@ -24,7 +24,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="nombre" th:text="#{nombre}">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" value="Cliente" />
+                    <input type="text" class="form-control" id="nombre" th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}"  th:field="*{nombre}" value="Cliente" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('nombre')}">
+                        <li th:each="err : ${#fields.errors('nombre')}" th:text="${err}" />
+                    </span>
                 </div>
             </div>
         </div>
@@ -33,7 +36,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="apellido" th:text="#{apellido1}">Apellido1</label>
-                    <input type="text" class="form-control" id="apellido" th:field="*{apellido}" value="Apellido1" />
+                    <input type="text" class="form-control" id="apellido" th:classappend="${#fields.hasErrors('apellido')?'is-invalid':''}"  th:field="*{apellido}" value="Apellido1" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('apellido')}">
+                        <li th:each="err : ${#fields.errors('apellido')}" th:text="${err}" />
+                    </span>
                 </div>
             </div>
         </div>
@@ -42,7 +48,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="apellido2" th:text="#{apellido2}">Apellido2</label>
-                    <input type="text" class="form-control" id="apellido2" th:field="*{apellido2}" value="Apellido2" />
+                    <input type="text" class="form-control" id="apellido2" th:classappend="${#fields.hasErrors('apellido2')?'is-invalid':''}"  th:field="*{apellido2}" value="Apellido2" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('apellido2')}">
+                        <li th:each="err : ${#fields.errors('apellido2')}" th:text="${err}" />
+                    </span>
                 </div>
             </div>
         </div>
@@ -51,7 +60,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="ciudad" th:text="#{ciudad}">Ciudad</label>
-                    <input type="text" class="form-control" id="ciudad" th:field="*{ciudad}" value="Ciudad" />
+                    <input type="text" class="form-control" id="ciudad" th:classappend="${#fields.hasErrors('ciudad')?'is-invalid':''}" th:field="*{ciudad}" value="Ciudad" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('ciudad')}">
+                        <li th:each="err : ${#fields.errors('ciudad')}" th:text="${err}" />
+                    </span>
                 </div>
             </div>
         </div>
@@ -60,7 +72,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="categoria" th:text="#{categoria}">Categoría</label>
-                    <input type="text" class="form-control" id="categoria" th:field="*{categoria}" value="Categoria" />
+                    <input type="text" class="form-control" id="categoria" th:classappend="${#fields.hasErrors('categoria')?'is-invalid':''}" th:field="*{categoria}" value="Categoria" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('categoria')}">
+                        <li th:each="err : ${#fields.errors('categoria')}" th:text="${err}" />
+                    </span>
                 </div>
             </div>
         </div>
