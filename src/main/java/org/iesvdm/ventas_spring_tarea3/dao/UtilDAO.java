@@ -17,6 +17,7 @@ public class UtilDAO {
                         rs.getString("C.nombre"),
                         rs.getString("C.apellido1"),
                         rs.getString("C.apellido2"),
+                        rs.getString("C.email"),
                         rs.getString("C.ciudad"),
                         rs.getInt("C.categoría")
                 ),
@@ -34,6 +35,7 @@ public class UtilDAO {
             rs.getString("nombre"),
             rs.getString("apellido1"),
             rs.getString("apellido2"),
+            rs.getString("email"),
             rs.getString("ciudad"),
             rs.getInt("categoría")
         );

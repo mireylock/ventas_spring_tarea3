@@ -31,14 +31,15 @@ public class ClienteDAOImpl implements RepositoryBase<Cliente> {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement("""
                         INSERT INTO cliente
-                        (nombre, apellido1, apellido2, ciudad, categoría)
+                        (nombre, apellido1, apellido2, email, ciudad, categoría)
                         VALUE
-                        (?, ?, ?, ?, ?)
+                        (?, ?, ?, ?, ?, ?)
                         """, Statement.RETURN_GENERATED_KEYS);
             int idx = 1;
             ps.setString(idx++, cliente.getNombre());
             ps.setString(idx++, cliente.getApellido());
             ps.setString(idx++, cliente.getApellido2());
+            ps.setString(idx++, cliente.getEmail());
             ps.setString(idx++, cliente.getCiudad());
             ps.setInt(idx++, cliente.getCategoria());
             return ps;
@@ -61,6 +62,7 @@ public class ClienteDAOImpl implements RepositoryBase<Cliente> {
                 .addValue("nombre", cliente.getNombre())
                 .addValue("apellido1", cliente.getApellido())
                 .addValue("apellido2", cliente.getApellido2())
+                .addValue("email", cliente.getEmail())
                 .addValue("ciudad", cliente.getCiudad())
                 .addValue("categoría", cliente.getCategoria());
 
@@ -78,6 +80,7 @@ public class ClienteDAOImpl implements RepositoryBase<Cliente> {
                         rs.getString("nombre"),
                         rs.getString("apellido1"),
                         rs.getString("apellido2"),
+                        rs.getString("email"),
                         rs.getString("ciudad"),
                         rs.getInt("categoría")
                         ));
@@ -93,6 +96,7 @@ public class ClienteDAOImpl implements RepositoryBase<Cliente> {
                                 rs.getString("nombre"),
                                 rs.getString("apellido1"),
                                 rs.getString("apellido2"),
+                                rs.getString("email"),
                                 rs.getString("ciudad"),
                                 rs.getInt("categoría"))
                         , id);
@@ -102,7 +106,7 @@ public class ClienteDAOImpl implements RepositoryBase<Cliente> {
 
     @Override
     public void update(Cliente cliente) {
-        int rows = jdbcTemplate.update(("UPDATE cliente SET nombre = ?, apellido1 = ?, apellido2 = ?, ciudad = ?, categoría = ? WHERE id = ?"), cliente.getNombre(), cliente.getApellido(), cliente.getApellido2(), cliente.getCiudad(), cliente.getCategoria(), cliente.getId());
+        int rows = jdbcTemplate.update(("UPDATE cliente SET nombre = ?, apellido1 = ?, apellido2 = ?, email = ?, ciudad = ?, categoría = ? WHERE id = ?"), cliente.getNombre(), cliente.getApellido(), cliente.getApellido2(), cliente.getEmail(), cliente.getCiudad(), cliente.getCategoria(), cliente.getId());
         if (rows == 0) System.out.println("Update de cliente con 0 registros actualizados");
     }
 

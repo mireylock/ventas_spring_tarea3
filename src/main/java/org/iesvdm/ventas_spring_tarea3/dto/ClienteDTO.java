@@ -25,12 +25,14 @@ public class ClienteDTO {
 
     private String apellido2;
 
+    @Email(message = "{msg.valid.email}")
+    private String email;
+
     @NotNull(message = "{msg.valid.not.null}")
     @NotBlank(message = "{msg.valid.not.empty}")
     @Size(max=50, message = "{msg.valid.max}")
     private String ciudad;
 
-    //TODO
     @NotNull(message = "{msg.valid.not.null}")
     @Min(value = 100, message = "{msg.valid.min.value}")
     @Max(value = 1000, message = "{msg.valid.max.value}")

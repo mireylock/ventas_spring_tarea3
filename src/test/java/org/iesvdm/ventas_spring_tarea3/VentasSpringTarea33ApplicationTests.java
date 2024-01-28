@@ -24,6 +24,7 @@ class VentasSpringTarea33ApplicationTests {
                 , "José M."
                 , "Martín"
                 , "Tejero"
+                , "email@gmail.com"
                 , "Málaga"
                 , 1);
         
@@ -35,11 +36,11 @@ class VentasSpringTarea33ApplicationTests {
     @Test
     void test_recargar_id_auto_increment_por_simplejdbcinsert() {
 
-
         Cliente cliente = new Cliente(0
                 , "José M."
                 , "Martín"
                 , "Tejero"
+                , "email@gmail.com"
                 , "Málaga"
                 , 1);
 

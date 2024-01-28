@@ -59,6 +59,18 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="form-group">
+                    <label for="email" th:text="#{email}">Email</label>
+                    <input type="text" class="form-control" id="email" th:classappend="${#fields.hasErrors('email')?'is-invalid':''}"  th:field="*{email}" value="email" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('email')}">
+                        <li th:each="err : ${#fields.errors('email')}" th:text="${err}" />
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
                     <label for="ciudad" th:text="#{ciudad}">Ciudad</label>
                     <input type="text" class="form-control" id="ciudad" th:classappend="${#fields.hasErrors('ciudad')?'is-invalid':''}" th:field="*{ciudad}" value="Ciudad" />
                     <span class="text-danger " th:if="${#fields.hasErrors('ciudad')}">

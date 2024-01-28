@@ -49,6 +49,15 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="form-group">
+                <label for="email" th:text="#{email}">Email</label>
+                <input type="text" class="form-control" id="email" th:value="${clienteDTO.email}" value="email" readonly="readonly"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="form-group">
                 <label for="ciudad" th:text="#{ciudad}">Ciudad</label>
                 <input type="text" class="form-control" id="ciudad" th:value="${clienteDTO.ciudad}" value="Ciudad" readonly="readonly"/>
             </div>
@@ -65,7 +74,7 @@
     </div>
 
     <!-- COMERCIALES ASOCIADOS AL CLIENTE CON CONTEO DE PEDIDOS -->
-    <div class="container mt-4">
+    <div class="container mt-5">
         <h2 class="text-center mb-3" th:text="#{totalPedidosClientePorComercial}">Total pedidos por comercial</h2>
 
         <div class="row justify-content-center mb-3">
@@ -104,14 +113,12 @@
         </div>
     </div>
 
-
     <!-- BOTÓN VOLVER -->
     <div class="row justify-content-center mt-3">
         <form action="/clientes" >
             <input type="submit" th:value="#{btnVolver}" value="Volver" class="btn btn-danger" />
         </form>
     </div>
-
 
 </div>
 

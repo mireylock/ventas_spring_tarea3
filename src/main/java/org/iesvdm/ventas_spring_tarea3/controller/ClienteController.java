@@ -66,7 +66,6 @@ public class ClienteController {
     public String submitCrear (@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("cliente", cliente);
-
             return "crear-cliente";
         }
         clienteService.createCliente(cliente);

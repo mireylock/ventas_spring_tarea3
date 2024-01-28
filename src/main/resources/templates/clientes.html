@@ -26,7 +26,7 @@
             <div class="col-md-1 align-self-center h6" th:text="#{nombre}">Nombre</div>
             <div class="col-md-1 align-self-center h6" th:text="#{apellido1}">Apellido1</div>
             <div class="col-md-1 align-self-center h6" th:text="#{apellido2}">Apellido2</div>
-<!--            <div class="col-md-1 align-self-center h6" th:text="#{}">Email</div>-->
+            <div class="col-md-2 align-self-center h6" th:text="#{email}">Email</div>
             <div class="col-md-1 align-self-center h6" th:text="#{ciudad}">Ciudad</div>
             <div class="col-md-1 align-self-center h6" th:text="#{categoria}">Categoría</div>
         </div>
@@ -36,10 +36,11 @@
             <div th:text="${cliente.nombre}" class="col-md-1 align-self-center">Nombre</div>
             <div th:text="${cliente.apellido}" class="col-md-1 align-self-center">Apellido1</div>
             <div th:text="${cliente.apellido2}" class="col-md-1 align-self-center">Apellido2</div>
+            <div th:text="${cliente.email}" class="col-md-2 align-self-center">Email</div>
             <div th:text="${cliente.ciudad}" class="col-md-1 align-self-center">Ciudad</div>
             <div th:text="${cliente.categoria}" class="col-md-1 align-self-center">Categoría</div>
 
-            <div class="col-md-5 align-self-center text-center">
+            <div class="col-4 align-self-center text-center">
                 <form class="d-inline" th:action="@{/clientes/__${cliente.id}__}">
                     <input type="submit" th:value="#{btnVerDetalle}" value="Ver Detalle" class="btn btn-primary"/>
                 </form>

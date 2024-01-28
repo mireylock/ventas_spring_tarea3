@@ -8,6 +8,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
@@ -32,7 +33,7 @@ public class PedidoDAOImpl implements PedidoDAO<Pedido> {
                         """, Statement.RETURN_GENERATED_KEYS);
             int idx = 1;
             ps.setDouble(idx++, pedido.getTotal());
-            ps.setDate(idx++, new java.sql.Date(pedido.getFecha().getYear()));//Esto habría que cambiarlo
+            ps.setDate(idx++, Date.valueOf(pedido.getFecha()));
             ps.setInt(idx++, pedido.getCliente().getId());
             ps.setInt(idx++, pedido.getComercial().getId());
             return ps;
