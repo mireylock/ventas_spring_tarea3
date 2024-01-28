@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container-fluid mt-3 mb-3">
+
+    <div class="container bg-white">
+        <span class="font-weight-bold" th:text="#{lang.cambio}">Cambiar idioma</span>:
+        <select id="locales">
+            <option value="es" th:text="#{lang.espaniol}">Español</option>
+            <option value="en" th:text="#{lang.ingles}">Inglés</option>
+        </select>
+    </div>
+
+    <div class="container mt-3 text-center">
+        <h1 th:text="#{titulo}">CRUD de Comercial y Cliente</h1>
+        <p th:text="#{bienvenida}">Bienvenido al CRUD de Comercial y CLiente realizado a partir de la base de datos de Ventas</p>
+        <img src="/img/DukeHeart.jpg" th:alt="#{altImgDuke}" style="width: 300px">
+        <p th:text="#{bienvenida2}">Duke espera que le guste mucho</p>
+
+        <div class="container mt-3 text-center">
+            <form class="d-inline" th:action="@{/clientes}">
+                <input type="submit" th:value="#{clientes}" value="Clientes" class="btn btn-primary"/>
+            </form>
+
+            <form class="d-inline" th:action="@{/comerciales}">
+                <input type="submit" th:value="#{comerciales}" value="Comerciales" class="btn btn-info"/>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+
+<!-- Script para el cambio de idioma -->
+<script th:inline="javascript">
+    $(function (){
+        //IMPLEMENTANDO UN BOTÓN backToTop
+        let btn = $('#backToTop');
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            } else {
+                btn.removeClass('show');
+            }
+        });
+        btn.on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: 0
+            }, '300');
+        });
+
+        let url = new URL(window.location.href);
+        let valLang = url.searchParams.get('lang')
+        $('#locales option[value='+valLang+']').attr('selected', 'selected');
+
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != ''){
+                let url = new URL(window.location.href);
+                url.searchParams.set('lang', selectedOption);
+                window.location.href= url.href;
+            }
+        });
+
+        /*[# th:if="${editPedidoID}"]*/
+        $('html, body').animate({
+            scrollTop: $('#'+[[${editPedidoID}]]).offset().top-137
+        }, 1000, () => $('#'+[[${editPedidoID}]]).addClass('highlight'));
+        /*[/]*/
+
+    });
+</script>
+
+</body>
+</html>

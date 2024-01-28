@@ -34,7 +34,7 @@ public class Cliente {
     @NotNull(message = "{msg.valid.not.null}")
     @Min(value = 100, message = "{msg.valid.min.value}")
     @Max(value = 1000, message = "{msg.valid.max.value}")
-    private int categoria;
+    private Integer categoria;
 
 
 }

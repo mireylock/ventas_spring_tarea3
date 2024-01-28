@@ -100,7 +100,7 @@ public class ComercialController {
     public String submitEditar(@Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("comercial", comercial);
-            return "comerciales-editar";
+            return "editar-comercial";
         }
         comercialService.replaceComercial(comercial);
         List<Comercial> listaComerciales = comercialService.listAll();

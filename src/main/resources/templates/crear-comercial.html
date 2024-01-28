@@ -8,6 +8,27 @@
 <body>
 
 <div class="container-fluid mt-3 mb-3">
+    <div class="container bg-white">
+        <div class="row">
+            <div class="col">
+                <span class="font-weight-bold" th:text="#{lang.cambio}">Cambiar idioma</span>:
+                <select id="locales">
+                    <option value="es" th:text="#{lang.espaniol}">Español</option>
+                    <option value="en" th:text="#{lang.ingles}">Inglés</option>
+                </select>
+            </div>
+
+            <div class="col text-right">
+                <form class="d-inline" th:action="@{/index}">
+                    <input type="submit" th:value="#{btn.inicio}" value="Clientes" class="btn btn-warning"/>
+                </form>
+                <form class="d-inline" th:action="@{/clientes}">
+                    <input type="submit" th:value="#{btn.go.clientes}" value="Clientes" class="btn btn-warning"/>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <form th:action="@{/comerciales/crear}" th:object="${comercial}" th:method="post">
         <h1 class="row justify-content-center mb-3" th:text="#{crearComercial}">Crear Comercial</h1>
         <div class="row justify-content-center">

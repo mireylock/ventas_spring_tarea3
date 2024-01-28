@@ -8,11 +8,24 @@
 <body>
 <div class="container-fluid mt-3 mb-3">
     <div class="container bg-white">
-        <span class="font-weight-bold" th:text="#{lang.cambio}">Cambiar idioma</span>:
-        <select id="locales">
-            <option value="es" th:text="#{lang.espaniol}">Español</option>
-            <option value="en" th:text="#{lang.ingles}">Inglés</option>
-        </select>
+        <div class="row">
+            <div class="col">
+                <span class="font-weight-bold" th:text="#{lang.cambio}">Cambiar idioma</span>:
+                <select id="locales">
+                    <option value="es" th:text="#{lang.espaniol}">Español</option>
+                    <option value="en" th:text="#{lang.ingles}">Inglés</option>
+                </select>
+            </div>
+
+            <div class="col text-right">
+                <form class="d-inline" th:action="@{/index}">
+                    <input type="submit" th:value="#{btn.inicio}" value="Clientes" class="btn btn-warning"/>
+                </form>
+                <form class="d-inline" th:action="@{/comerciales}">
+                    <input type="submit" th:value="#{btn.go.comerciales}" value="Clientes" class="btn btn-warning"/>
+                </form>
+            </div>
+        </div>
     </div>
 
     <h1 class="row justify-content-center mt-3 mb-3" th:text="#{clientes}">Clientes</h1>

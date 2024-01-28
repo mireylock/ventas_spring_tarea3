@@ -1,0 +1,341 @@
+:root {
+    --color-background: #beeb9f;
+    --color-bug: #00a388;
+    --color-text: #00a388;
+}
+
+body {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    background: var(--color-background);
+}
+
+.error-code {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    grid-gap: 4vw;
+    position: relative;
+    border: 0;
+    background: none;
+    font-family: "Nunito", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    padding: 4vw;
+    border-radius: 1vw;
+    -webkit-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    transition: all 250ms ease;
+}
+.error-code:after {
+    content: attr(data-message);
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    font-size: 4vw;
+    color: var(--color-text);
+    opacity: 0;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    -webkit-transition-delay: 1000ms;
+    -o-transition-delay: 1000ms;
+    transition-delay: 1000ms;
+}
+.error-code:hover:after {
+    opacity: 1;
+}
+.error-code:hover .cell.filled:nth-child(1) {
+    -webkit-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    transform: rotate(15deg);
+}
+.error-code:hover .cell.filled:nth-child(2) {
+    -webkit-transform: rotate(30deg);
+    -ms-transform: rotate(30deg);
+    -o-transform: rotate(30deg);
+    transform: rotate(30deg);
+}
+.error-code:hover .cell.filled:nth-child(3) {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.error-code:hover .cell.filled:nth-child(4) {
+    -webkit-transform: rotate(60deg);
+    -ms-transform: rotate(60deg);
+    -o-transform: rotate(60deg);
+    transform: rotate(60deg);
+}
+.error-code:hover .cell.filled:nth-child(5) {
+    -webkit-transform: rotate(75deg);
+    -ms-transform: rotate(75deg);
+    -o-transform: rotate(75deg);
+    transform: rotate(75deg);
+}
+.error-code:hover .cell.filled:nth-child(6) {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+.error-code:hover .cell.filled:nth-child(7) {
+    -webkit-transform: rotate(105deg);
+    -ms-transform: rotate(105deg);
+    -o-transform: rotate(105deg);
+    transform: rotate(105deg);
+}
+.error-code:hover .cell.filled:nth-child(8) {
+    -webkit-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+    -o-transform: rotate(120deg);
+    transform: rotate(120deg);
+}
+.error-code:hover .cell.filled:nth-child(9) {
+    -webkit-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    -o-transform: rotate(135deg);
+    transform: rotate(135deg);
+}
+.error-code:hover .cell.filled:nth-child(10) {
+    -webkit-transform: rotate(150deg);
+    -ms-transform: rotate(150deg);
+    -o-transform: rotate(150deg);
+    transform: rotate(150deg);
+}
+.error-code:hover .cell.filled:nth-child(11) {
+    -webkit-transform: rotate(165deg);
+    -ms-transform: rotate(165deg);
+    -o-transform: rotate(165deg);
+    transform: rotate(165deg);
+}
+.error-code:hover .cell.filled:nth-child(12) {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+.error-code:hover .cell.filled:nth-child(13) {
+    -webkit-transform: rotate(195deg);
+    -ms-transform: rotate(195deg);
+    -o-transform: rotate(195deg);
+    transform: rotate(195deg);
+}
+.error-code:hover .cell.filled:nth-child(14) {
+    -webkit-transform: rotate(210deg);
+    -ms-transform: rotate(210deg);
+    -o-transform: rotate(210deg);
+    transform: rotate(210deg);
+}
+.error-code:hover .cell.filled:nth-child(15) {
+    -webkit-transform: rotate(225deg);
+    -ms-transform: rotate(225deg);
+    -o-transform: rotate(225deg);
+    transform: rotate(225deg);
+}
+.error-code:hover .cell.filled:nth-child(16) {
+    -webkit-transform: rotate(240deg);
+    -ms-transform: rotate(240deg);
+    -o-transform: rotate(240deg);
+    transform: rotate(240deg);
+}
+.error-code:hover .cell.filled:nth-child(17) {
+    -webkit-transform: rotate(255deg);
+    -ms-transform: rotate(255deg);
+    -o-transform: rotate(255deg);
+    transform: rotate(255deg);
+}
+.error-code:hover .cell.filled:nth-child(18) {
+    -webkit-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+.error-code:hover .cell.filled:nth-child(19) {
+    -webkit-transform: rotate(285deg);
+    -ms-transform: rotate(285deg);
+    -o-transform: rotate(285deg);
+    transform: rotate(285deg);
+}
+.error-code:hover .cell.filled:nth-child(20) {
+    -webkit-transform: rotate(300deg);
+    -ms-transform: rotate(300deg);
+    -o-transform: rotate(300deg);
+    transform: rotate(300deg);
+}
+.error-code:hover .cell.filled:nth-child(21) {
+    -webkit-transform: rotate(315deg);
+    -ms-transform: rotate(315deg);
+    -o-transform: rotate(315deg);
+    transform: rotate(315deg);
+}
+.error-code:hover .cell.filled:nth-child(22) {
+    -webkit-transform: rotate(330deg);
+    -ms-transform: rotate(330deg);
+    -o-transform: rotate(330deg);
+    transform: rotate(330deg);
+}
+.error-code:hover .cell.filled:nth-child(23) {
+    -webkit-transform: rotate(345deg);
+    -ms-transform: rotate(345deg);
+    -o-transform: rotate(345deg);
+    transform: rotate(345deg);
+}
+.error-code:hover .cell.filled:nth-child(24) {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+}
+.error-code:hover .number {
+    grid-gap: 2vw;
+}
+.error-code:hover .bug {
+    -webkit-transform: translateY(-200vh);
+    -ms-transform: translateY(-200vh);
+    -o-transform: translateY(-200vh);
+    transform: translateY(-200vh);
+    -webkit-transition-delay: 500ms;
+    -o-transition-delay: 500ms;
+    transition-delay: 500ms;
+}
+.error-code:hover .bug:before {
+    top: -0.5vw;
+}
+.error-code:hover .bug:after {
+    left: -0.75vw;
+    right: -0.75vw;
+    height: 1.5vw;
+}
+
+.number {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    grid-gap: 0.25vw;
+    margin: auto 2vw;
+}
+
+.cell.filled {
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+
+.bug {
+    background: var(--color-bug);
+    -webkit-transition: -webkit-transform 4000ms ease;
+    transition: -webkit-transform 4000ms ease;
+    -o-transition: -o-transform 4000ms ease;
+    transition: transform 4000ms ease;
+    transition: transform 4000ms ease, -webkit-transform 4000ms ease, -o-transform 4000ms ease;
+    width: 2.25vw;
+    height: 2.5vw;
+    position: relative;
+    border-radius: 100%;
+    -webkit-transition-delay: 0;
+    -o-transition-delay: 0;
+    transition-delay: 0;
+}
+.bug:before {
+    content: "";
+    height: 1.5vw;
+    width: 1.5vw;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0.375vw;
+    background: var(--color-bug);
+    border-radius: 100%;
+    z-index: -1;
+    -webkit-transition: all 1000ms ease;
+    -o-transition: all 1000ms ease;
+    transition: all 1000ms ease;
+}
+.bug:after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0.5vw;
+    right: 0.5vw;
+    bottom: 0.5vw;
+    height: 0;
+    -webkit-transition: all 250ms ease;
+    -o-transition: all 250ms ease;
+    transition: all 250ms ease;
+    -webkit-animation: infinite skitter 100ms ease;
+    -o-animation: infinite skitter 100ms ease;
+    animation: infinite skitter 100ms ease;
+    background: top left/100% 100% -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(45%, transparent), color-stop(45%, var(--color-bug)), color-stop(55%, var(--color-bug)), color-stop(55%, transparent)), top left/100% 100% -webkit-gradient(linear, left top, right bottom, from(transparent), color-stop(45%, transparent), color-stop(45%, var(--color-bug)), color-stop(55%, var(--color-bug)), color-stop(55%, transparent)), top left/100% 100% -webkit-gradient(linear, right top, left bottom, from(transparent), color-stop(45%, transparent), color-stop(45%, var(--color-bug)), color-stop(55%, var(--color-bug)), color-stop(55%, transparent));
+    background: top left/100% 100% -webkit-linear-gradient(transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%), top left/100% 100% -webkit-linear-gradient(top left, transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%), top left/100% 100% -webkit-linear-gradient(top right, transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%);
+    background: top left/100% 100% -o-linear-gradient(transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%), top left/100% 100% -o-linear-gradient(top left, transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%), top left/100% 100% -o-linear-gradient(top right, transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%);
+    background: top left/100% 100% linear-gradient(transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%), top left/100% 100% linear-gradient(to bottom right, transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%), top left/100% 100% linear-gradient(to bottom left, transparent, transparent 45%, var(--color-bug) 45%, var(--color-bug) 55%, transparent 55%);
+}
+
+@-webkit-keyframes skitter {
+    0%, 100% {
+        -webkit-transform: rotate(-35deg);
+        transform: rotate(-35deg);
+    }
+    50% {
+        -webkit-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+}
+
+@-o-keyframes skitter {
+    0%, 100% {
+        -o-transform: rotate(-35deg);
+        transform: rotate(-35deg);
+    }
+    50% {
+        -o-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+}
+
+@keyframes skitter {
+    0%, 100% {
+        -webkit-transform: rotate(-35deg);
+        -o-transform: rotate(-35deg);
+        transform: rotate(-35deg);
+    }
+    50% {
+        -webkit-transform: rotate(35deg);
+        -o-transform: rotate(35deg);
+        transform: rotate(35deg);
+    }
+}/*# sourceMappingURL=error.css.map */
