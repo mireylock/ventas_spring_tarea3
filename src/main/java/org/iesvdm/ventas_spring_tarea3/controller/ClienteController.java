@@ -6,6 +6,7 @@ import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.dto.ClienteDTO;
 import org.iesvdm.ventas_spring_tarea3.mapstrut.ClienteMapper;
 import org.iesvdm.ventas_spring_tarea3.service.ClienteService;
+import org.iesvdm.ventas_spring_tarea3.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +27,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteMapper clienteMapper;
+
+    @Autowired
+    private ComercialService comercialService;
 
     @GetMapping("/clientes")
     public String listar (Model model) {
@@ -81,23 +85,26 @@ public class ClienteController {
         Cliente cliente = clienteService.detailCliente(id);
         model.addAttribute("cliente", cliente);
 
+        List<Comercial> listaComerciales = comercialService.listAll();
+        model.addAttribute("listaComerciales", listaComerciales);
+
         return "editar-cliente";
     }
 
-//    @PostMapping("/clientes/editar/{id}")
-//    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
-//        if (bindingResult.hasErrors()) {
-//            model.addAttribute("cliente", cliente);
-//            return "editar-cliente";
-//        }
-//        clienteService.replaceCliente(cliente);
-//        List<Cliente> listaClientes = clienteService.listAll();
-//        model.addAttribute("listaClientes", listaClientes);
-//        //Devuelve al listado con to dos los clientes tras editar un cliente
-//        return "/clientes";
-//    }
+    @PostMapping("/clientes/editar/{id}")
+    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("cliente", cliente);
+            return "editar-cliente";
+        }
+        clienteService.replaceCliente(cliente);
+        List<Cliente> listaClientes = clienteService.listAll();
+        model.addAttribute("listaClientes", listaClientes);
+        //Devuelve al listado con to dos los clientes tras editar un cliente
+        return "/clientes";
+    }
 
-    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+    public String submitEditar(@Valid @ModelAttribute("comercial") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("cliente", cliente);
             model.addAttribute("comercial", comercial);

@@ -122,11 +122,11 @@
     <div>
         <label for="selectcomercial" class="form-label" >Comercial</label>
         <div >
-            <select id="selectcomercial" class="js-select2 form-select" th:classappend="${#fields.hasErrors('idComercial')?'is-invalid':''}" th:field="*{idComercial}">
+            <select id="selectcomercial" class="js-select2 form-select" th:classappend="${#fields.hasErrors('idComercial')?'is-invalid':''}" >
                 <option value="-1" >Seleccione opción</option>
                 <option
                         th:value="${comercial.id}"
-                        th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido1 + ' ' + comercial.apellido2}"
+                        th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido + ' ' + comercial.apellido2}"
                         th:each="comercial:${listaComerciales}">
                 </option>
             </select>
