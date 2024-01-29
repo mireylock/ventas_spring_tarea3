@@ -32,6 +32,7 @@ public class Cliente {
     private String ciudad;
 
     @NotNull(message = "{msg.valid.not.null}")
+    @Pattern(regexp = "\\d00", message = "{msg.valid.pattern.categoria}")
     @Min(value = 100, message = "{msg.valid.min.value}")
     @Max(value = 1000, message = "{msg.valid.max.value}")
     private Integer categoria;

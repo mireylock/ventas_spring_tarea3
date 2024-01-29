@@ -84,17 +84,30 @@ public class ClienteController {
         return "editar-cliente";
     }
 
-    @PostMapping("/clientes/editar/{id}")
-    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+//    @PostMapping("/clientes/editar/{id}")
+//    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("cliente", cliente);
+//            return "editar-cliente";
+//        }
+//        clienteService.replaceCliente(cliente);
+//        List<Cliente> listaClientes = clienteService.listAll();
+//        model.addAttribute("listaClientes", listaClientes);
+//        //Devuelve al listado con to dos los clientes tras editar un cliente
+//        return "/clientes";
+//    }
+
+    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("cliente", cliente);
+            model.addAttribute("comercial", comercial);
             return "editar-cliente";
         }
         clienteService.replaceCliente(cliente);
         List<Cliente> listaClientes = clienteService.listAll();
         model.addAttribute("listaClientes", listaClientes);
         //Devuelve al listado con to dos los clientes tras editar un cliente
-        return "/clientes";
+        return "/editar-cliente";
     }
 
     @PostMapping("/clientes/borrar/{id}")

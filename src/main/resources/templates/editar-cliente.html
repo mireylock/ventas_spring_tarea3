@@ -117,6 +117,32 @@
             <input type="submit" th:value="#{btnGuardar}" value="Guardar" class="btn btn-success"/>
         </div>
     </form>
+
+    <!-- EXTRA: AÑADIR COMERCIALES AL CLIENTE-->
+    <div>
+        <label for="selectcomercial" class="form-label" >Comercial</label>
+        <div >
+            <select id="selectcomercial" class="js-select2 form-select" th:classappend="${#fields.hasErrors('idComercial')?'is-invalid':''}" th:field="*{idComercial}">
+                <option value="-1" >Seleccione opción</option>
+                <option
+                        th:value="${comercial.id}"
+                        th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido1 + ' ' + comercial.apellido2}"
+                        th:each="comercial:${listaComerciales}">
+                </option>
+            </select>
+
+            <ul class="text-danger" th:if="${#fields.hasErrors('idComercial')}">
+                <li th:each="err : ${#fields.errors('idComercial')}" th:text="${err}" />
+            </ul>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <input type="submit" th:value="#{btnAniadirComercial}" value="Añadir Comercial" class="btn btn-success"/>
+    </div>
+
+
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
