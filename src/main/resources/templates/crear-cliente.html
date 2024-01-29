@@ -48,7 +48,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="apellido" th:text="#{apellido1}">Apellido1</label>
-                    <input type="text" class="form-control" id="apellido" th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}" th:field="*{apellido}" value="Apellido1" />
+                    <input type="text" class="form-control" id="apellido" th:classappend="${#fields.hasErrors('apellido')?'is-invalid':''}" th:field="*{apellido}" value="Apellido1" />
                     <span class="text-danger " th:if="${#fields.hasErrors('apellido')}">
                         <li th:each="err : ${#fields.errors('apellido')}" th:text="${err}" />
                     </span>
@@ -84,7 +84,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label for="ciudad" th:text="#{ciudad}">Ciudad</label>
-                    <input type="text" class="form-control" id="ciudad" th:classappend="${#fields.hasErrors('nombre')?'is-invalid':''}" th:field="*{ciudad}" value="Ciudad" />
+                    <input type="text" class="form-control" id="ciudad" th:classappend="${#fields.hasErrors('ciudad')?'is-invalid':''}" th:field="*{ciudad}" value="Ciudad" />
                     <span class="text-danger " th:if="${#fields.hasErrors('ciudad')}">
                         <li th:each="err : ${#fields.errors('ciudad')}" th:text="${err}" />
                     </span>
