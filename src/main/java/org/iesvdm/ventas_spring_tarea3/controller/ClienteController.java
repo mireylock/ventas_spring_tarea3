@@ -91,19 +91,20 @@ public class ClienteController {
         return "editar-cliente";
     }
 
-    @PostMapping("/clientes/editar/{id}")
-    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("cliente", cliente);
-            return "editar-cliente";
-        }
-        clienteService.replaceCliente(cliente);
-        List<Cliente> listaClientes = clienteService.listAll();
-        model.addAttribute("listaClientes", listaClientes);
-        //Devuelve al listado con to dos los clientes tras editar un cliente
-        return "/clientes";
-    }
+//    @PostMapping("/clientes/editar/{id}")
+//    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            model.addAttribute("cliente", cliente);
+//            return "editar-cliente";
+//        }
+//        clienteService.replaceCliente(cliente);
+//        List<Cliente> listaClientes = clienteService.listAll();
+//        model.addAttribute("listaClientes", listaClientes);
+//        //Devuelve al listado con to dos los clientes tras editar un cliente
+//        return "/clientes";
+//    }
 
+    @PostMapping("/clientes/editar/{id}")
     public String submitEditar(@Valid @ModelAttribute("comercial") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("cliente", cliente);
@@ -116,6 +117,11 @@ public class ClienteController {
         //Devuelve al listado con to dos los clientes tras editar un cliente
         return "/editar-cliente";
     }
+
+//    @PostMapping("/clientes/editar/{id}")
+//    public String submitEditar(@Valid @ModelAttribute("comercial") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+//
+//    }
 
     @PostMapping("/clientes/borrar/{id}")
     public RedirectView submitBorrar(@PathVariable Integer id) {

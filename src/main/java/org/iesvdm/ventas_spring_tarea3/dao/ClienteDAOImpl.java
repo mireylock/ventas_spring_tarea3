@@ -31,7 +31,7 @@ public class ClienteDAOImpl implements RepositoryBase<Cliente> {
         jdbcTemplate.update(connection -> {
             PreparedStatement ps = connection.prepareStatement("""
                         INSERT INTO cliente
-                        (nombre, apellido1, apellido2, email, ciudad, categoría)
+                        (nombre, apellido1, apellido2, email, ciudad, categoría, comercialesAsociados)
                         VALUE
                         (?, ?, ?, ?, ?, ?)
                         """, Statement.RETURN_GENERATED_KEYS);

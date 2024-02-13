@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +38,4 @@ public class Cliente {
     @Min(value = 100, message = "{msg.valid.min.value}")
     @Max(value = 1000, message = "{msg.valid.max.value}")
     private Integer categoria;
-
-
 }

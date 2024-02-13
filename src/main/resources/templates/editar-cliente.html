@@ -112,34 +112,35 @@
             </div>
         </div>
 
+        <!-- EXTRA: AÑADIR COMERCIALES AL CLIENTE-->
+        <div class="container mt-3">
+            <div class="row justify-content-center">
+                <form th:action="@{/clientes/editar/__${cliente.id}__}" th:object="${cliente}" th:method="post">
+                    <div class="mb-3">
+                        <label for="selectcomercial" class="form-label">Comercial</label>
+                        <select id="selectcomercial" class="form-select">
+                            <option value="-1">Seleccione opción</option>
+                            <option
+                                    th:value="${comercial.id}"
+                                    th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido + ' ' + comercial.apellido2}"
+                                    th:each="comercial:${listaComerciales}">
+                            </option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" value="Añadir Comercial" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <div class="row justify-content-center">
             <a href="/clientes" class="btn btn-danger mr-3" th:text="#{btnCancelar}">Cancelar</a>
             <input type="submit" th:value="#{btnGuardar}" value="Guardar" class="btn btn-success"/>
         </div>
     </form>
 
-    <!-- EXTRA: AÑADIR COMERCIALES AL CLIENTE-->
-    <div>
-        <label for="selectcomercial" class="form-label" >Comercial</label>
-        <div >
-            <select id="selectcomercial" class="js-select2 form-select" th:classappend="${#fields.hasErrors('idComercial')?'is-invalid':''}" >
-                <option value="-1" >Seleccione opción</option>
-                <option
-                        th:value="${comercial.id}"
-                        th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido + ' ' + comercial.apellido2}"
-                        th:each="comercial:${listaComerciales}">
-                </option>
-            </select>
 
-            <ul class="text-danger" th:if="${#fields.hasErrors('idComercial')}">
-                <li th:each="err : ${#fields.errors('idComercial')}" th:text="${err}" />
-            </ul>
-        </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <input type="submit" th:value="#{btnAniadirComercial}" value="Añadir Comercial" class="btn btn-success"/>
-    </div>
 
 
 
