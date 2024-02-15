@@ -1,72 +1,224 @@
-DROP DATABASE IF EXISTS ventas;
-CREATE DATABASE ventas CHARACTER SET utf8mb4;
-USE ventas;
+-- MySQL Workbench Forward Engineering
 
-CREATE TABLE cliente (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(100) NOT NULL,
-  apellido1 VARCHAR(100) NOT NULL,
-  apellido2 VARCHAR(100),
-  email VARCHAR(100),
-  ciudad VARCHAR(100),
-  categoría INT UNSIGNED
-);
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
-CREATE TABLE comercial (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  nombre VARCHAR(100) NOT NULL,
-  apellido1 VARCHAR(100) NOT NULL,
-  apellido2 VARCHAR(100),
-  comisión FLOAT
-);
+-- -----------------------------------------------------
+-- Schema ventas
+-- -----------------------------------------------------
 
-CREATE TABLE pedido (
-  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  total DOUBLE NOT NULL,
-  fecha DATE,
-  id_cliente INT UNSIGNED NOT NULL,
-  id_comercial INT UNSIGNED NOT NULL,
-  FOREIGN KEY (id_cliente) REFERENCES cliente(id)
-        ON DELETE CASCADE,
-  FOREIGN KEY (id_comercial) REFERENCES comercial(id)
-);
+CREATE SCHEMA IF NOT EXISTS `ventas` DEFAULT CHARACTER SET utf8mb4 ;
+USE `ventas` ;
 
-INSERT INTO cliente VALUES(1, 'Aarón', 'Rivero', 'Gómez', NULL,'Almería', 100);
-INSERT INTO cliente VALUES(2, 'Adela', 'Salas', 'Díaz', NULL, 'Granada', 200);
-INSERT INTO cliente VALUES(3, 'Adolfo', 'Rubio', 'Flores','adolfrubito@gmail.com', 'Sevilla', NULL);
-INSERT INTO cliente VALUES(4, 'Adrián', 'Suárez', NULL, '','Jaén', 300);
-INSERT INTO cliente VALUES(5, 'Marcos', 'Loyola', 'Méndez', 'mloyola@hotmail.com', 'Almería', 200);
-INSERT INTO cliente VALUES(6, 'María', 'Santana', 'Moreno', 'm_santana@gmail.com', 'Cádiz', 100);
-INSERT INTO cliente VALUES(7, 'Pilar', 'Ruiz', NULL, NULL, 'Sevilla', 300);
-INSERT INTO cliente VALUES(8, 'Pepe', 'Ruiz', 'Santana', NULL,'Huelva', 200);
-INSERT INTO cliente VALUES(9, 'Guillermo', 'López', 'Gómez', 'guille.8896@yahoo.es', 'Granada', 225);
-INSERT INTO cliente VALUES(10, 'Daniel', 'Santana', 'Loyola', NULL,'Sevilla', 125);
+-- -----------------------------------------------------
+-- Table `ventas`.`comercial`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ventas`.`comercial` (
+                                                    `id` INT NOT NULL AUTO_INCREMENT,
+                                                    `nombre` VARCHAR(100) NOT NULL,
+                                                    `apellido1` VARCHAR(100) NOT NULL,
+                                                    `apellido2` VARCHAR(100) NULL,
+                                                    `comisión` FLOAT NULL,
+                                                    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
 
-INSERT INTO comercial VALUES(1, 'Daniel', 'Sáez', 'Vega', 0.15);
-INSERT INTO comercial VALUES(2, 'Juan', 'Gómez', 'López', 0.13);
-INSERT INTO comercial VALUES(3, 'Diego','Flores', 'Salas', 0.11);
-INSERT INTO comercial VALUES(4, 'Marta','Herrera', 'Gil', 0.14);
-INSERT INTO comercial VALUES(5, 'Antonio','Carretero', 'Ortega', 0.12);
-INSERT INTO comercial VALUES(6, 'Manuel','Domínguez', 'Hernández', 0.13);
-INSERT INTO comercial VALUES(7, 'Antonio','Vega', 'Hernández', 0.11);
-INSERT INTO comercial VALUES(8, 'Alfredo','Ruiz', 'Flores', 0.05);
 
-INSERT INTO pedido VALUES(1, 150.5, '2017-10-05', 5, 2);
-INSERT INTO pedido VALUES(2, 270.65, '2016-09-10', 1, 5);
-INSERT INTO pedido VALUES(3, 65.26, '2017-10-05', 2, 1);
-INSERT INTO pedido VALUES(4, 110.5, '2016-08-17', 8, 3);
-INSERT INTO pedido VALUES(5, 948.5, '2017-09-10', 5, 2);
-INSERT INTO pedido VALUES(6, 2400.6, '2016-07-27', 7, 1);
-INSERT INTO pedido VALUES(7, 5760, '2015-09-10', 2, 1);
-INSERT INTO pedido VALUES(8, 1983.43, '2017-10-10', 4, 6);
-INSERT INTO pedido VALUES(9, 2480.4, '2016-10-10', 8, 3);
-INSERT INTO pedido VALUES(10, 250.45, '2015-06-27', 8, 2);
-INSERT INTO pedido VALUES(11, 75.29, '2016-08-17', 3, 7);
-INSERT INTO pedido VALUES(12, 3045.6, '2017-04-25', 2, 1);
-INSERT INTO pedido VALUES(13, 545.75, '2019-01-25', 6, 1);
-INSERT INTO pedido VALUES(14, 145.82, '2017-02-02', 6, 1);
-INSERT INTO pedido VALUES(15, 370.85, '2019-03-11', 1, 5);
-INSERT INTO pedido VALUES(16, 2389.23, '2019-03-11', 1, 5);
+-- -----------------------------------------------------
+-- Table `ventas`.`cliente`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ventas`.`cliente` (
+                                                  `id` INT NOT NULL AUTO_INCREMENT,
+                                                  `nombre` VARCHAR(100) NOT NULL,
+                                                  `apellido1` VARCHAR(100) NOT NULL,
+                                                  `apellido2` VARCHAR(100) NULL,
+                                                  `email` VARCHAR(100) NULL,
+                                                  `ciudad` VARCHAR(100) NULL,
+                                                  `categoría` INT NULL,
+                                                  PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
 
-INSERT INTO pedido VALUES(18, 270.65, '2024-01-05', 1, 4);
 
+-- -----------------------------------------------------
+-- Table `ventas`.`pedido`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ventas`.`pedido` (
+                                                 `id` INT NOT NULL AUTO_INCREMENT,
+                                                 `total` DOUBLE NOT NULL,
+                                                 `fecha` DATE NULL,
+                                                 `id_comercial` INT NOT NULL,
+                                                 `id_cliente` INT NOT NULL,
+                                                 PRIMARY KEY (`id`),
+                                                 INDEX `fk_pedido_id_comercialx` (`id_comercial`),
+                                                 INDEX `fk_pedido_cliente1_idx` (`id_cliente`),
+                                                 CONSTRAINT `fk_pedido_comercial`
+                                                     FOREIGN KEY (`id_comercial`)
+                                                         REFERENCES `ventas`.`comercial` (`id`)
+                                                         ON DELETE NO ACTION
+                                                         ON UPDATE NO ACTION,
+                                                 CONSTRAINT `fk_pedido_cliente1`
+                                                     FOREIGN KEY (`id_cliente`)
+                                                         REFERENCES `ventas`.`cliente` (`id`)
+                                                         ON DELETE NO ACTION
+                                                         ON UPDATE NO ACTION
+)
+    ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `ventas`.`cliente_has_comercial`
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Table `ventas`.`cliente_has_comercial`
+-- -----------------------------------------------------
+-- -----------------------------------------------------
+-- Table `ventas`.`cliente_has_comercial`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `ventas`.`cliente_has_comercial` (
+                                                                `id_comercial` INT NOT NULL,
+                                                                `id_cliente` INT NOT NULL,
+                                                                `fecha_asociacion` DATE NULL,
+                                                                `prioridad` INT NULL,
+                                                                PRIMARY KEY (`id_comercial`, `id_cliente`),
+                                                                INDEX `fk_cliente_has_comercial_cliente1_idx` (`id_cliente`),
+                                                                INDEX `fk_cliente_has_comercial_comercial1_idx` (`id_comercial`),
+                                                                CONSTRAINT `fk_cliente_has_comercial_comercial1`
+                                                                    FOREIGN KEY (`id_comercial`)
+                                                                        REFERENCES `ventas`.`comercial` (`id`)
+                                                                        ON DELETE NO ACTION
+                                                                        ON UPDATE NO ACTION,
+                                                                CONSTRAINT `fk_cliente_has_comercial_cliente1`
+                                                                    FOREIGN KEY (`id_cliente`)
+                                                                        REFERENCES `ventas`.`cliente` (`id`)
+                                                                        ON DELETE NO ACTION
+                                                                        ON UPDATE NO ACTION
+)
+    ENGINE = InnoDB;
+
+
+
+
+-- Insert some sample data
+INSERT INTO `ventas`.`comercial` (`nombre`, `apellido1`, `apellido2`, `comisión`) VALUES
+                                                                                  ('John', 'Doe', 'Sr.', 0.05),
+                                                                                  ('Jane', 'Smith', 'Ms.', 0.07),
+                                                                                ('Mary', 'White', 'Ms.', 0.07),
+                                                                                ('Sally', 'Santos', 'Ms.', 0.07);
+
+
+
+INSERT INTO `ventas`.`cliente` (`nombre`, `apellido1`, `apellido2`, `email`, `ciudad`, `categoría`) VALUES
+                                                                                                        ('Michael', 'Johnson', 'Jr.', 'michael@example.com', 'New York', 1),
+                                                                                                        ('Emily', 'Williams', NULL, 'emily@example.com', 'Los Angeles', 2);
+
+INSERT INTO `ventas`.`pedido` (`total`, `fecha`, `id_comercial`, `id_cliente`) VALUES
+                                                                                   (100.50, '2024-02-14', 1, 1),
+                                                                                   (75.25, '2024-02-13', 2, 2);
+
+INSERT INTO `ventas`.`cliente_has_comercial` (`id_comercial`, `id_cliente`, `fecha_asociacion`, `prioridad`) VALUES
+                                                                                                                 (1, 1, '2024-01-01', 1),
+                                                                                                                 (2, 2, '2024-01-15', 2);
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+# -- MySQL Workbench Forward Engineering
+#
+# SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+# SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+# SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+#
+# -- -----------------------------------------------------
+# -- Schema ventas
+# -- -----------------------------------------------------
+#
+# -- -----------------------------------------------------
+# -- Schema ventas
+# -- -----------------------------------------------------
+# CREATE SCHEMA IF NOT EXISTS `ventas` DEFAULT CHARACTER SET utf8mb3 ;
+# USE `ventas` ;
+#
+# -- -----------------------------------------------------
+# -- Table `ventas`.`comercial`
+# -- -----------------------------------------------------
+# CREATE TABLE IF NOT EXISTS `ventas`.`comercial` (
+#   `id` INT NOT NULL,
+#   `nombre` VARCHAR(100) NOT NULL,
+#   `apellido1` VARCHAR(100) NOT NULL,
+#   `apellido2` VARCHAR(100) NULL,
+#   `comisión` FLOAT NULL,
+#   PRIMARY KEY (`id`))
+# ENGINE = InnoDB;
+#
+#
+# -- -----------------------------------------------------
+# -- Table `ventas`.`cliente`
+# -- -----------------------------------------------------
+# CREATE TABLE IF NOT EXISTS `ventas`.`cliente` (
+#   `id` INT NOT NULL,
+#   `nombre` VARCHAR(100) NOT NULL,
+#   `apellido1` VARCHAR(100) NOT NULL,
+#   `apellido2` VARCHAR(100) NULL,
+#   `email` VARCHAR(100) NULL,
+#   `ciudad` VARCHAR(100) NULL,
+#   `categoría` INT NULL,
+#   PRIMARY KEY (`id`))
+# ENGINE = InnoDB;
+#
+#
+# -- -----------------------------------------------------
+# -- Table `ventas`.`pedido`
+# -- -----------------------------------------------------
+# CREATE TABLE IF NOT EXISTS `ventas`.`pedido` (
+#   `id` INT NOT NULL,
+#   `total` DOUBLE NOT NULL,
+#   `fecha` DATE NULL,
+#   `id_comercial` INT NOT NULL,
+#   `id_cliente` INT NOT NULL,
+#   PRIMARY KEY (`id`, `id_comercial`, `id_cliente`),
+#   INDEX `fk_pedido_id_comercialx` (`id_comercial` ASC) VISIBLE,
+#   INDEX `fk_pedido_cliente1_idx` (`id_cliente` ASC) VISIBLE,
+#   CONSTRAINT `fk_pedido_comercial`
+#     FOREIGN KEY (`id_comercial`)
+#     REFERENCES `ventas`.`comercial` (`id`)
+#     ON DELETE NO ACTION
+#     ON UPDATE NO ACTION,
+#   CONSTRAINT `fk_pedido_cliente1`
+#     FOREIGN KEY (`id_cliente`)
+#     REFERENCES `ventas`.`cliente` (`id`)
+#     ON DELETE NO ACTION
+#     ON UPDATE NO ACTION)
+# ENGINE = InnoDB;
+#
+#
+# -- -----------------------------------------------------
+# -- Table `ventas`.`cliente_has_comercial`
+# -- -----------------------------------------------------
+# CREATE TABLE IF NOT EXISTS `ventas`.`cliente_has_comercial` (
+#   `id_comercial` INT NOT NULL,
+#   `id_cliente` INT NOT NULL,
+#   `fecha_asociacion` DATE NULL,
+#   `prioridad` INT NULL,
+#   PRIMARY KEY (`id_comercial`, `id_cliente`),
+#   INDEX `fk_cliente_has_comercial_cliente1_idx` (`id_cliente` ASC) VISIBLE,
+#   INDEX `fk_cliente_has_comercial_comercial1_idx` (`id_comercial` ASC) VISIBLE,
+#   CONSTRAINT `fk_cliente_has_comercial_comercial1`
+#     FOREIGN KEY (`id_comercial`)
+#     REFERENCES `ventas`.`comercial` (`id`)
+#     ON DELETE NO ACTION
+#     ON UPDATE NO ACTION,
+#   CONSTRAINT `fk_cliente_has_comercial_cliente1`
+#     FOREIGN KEY (`id_cliente`)
+#     REFERENCES `ventas`.`cliente` (`id`)
+#     ON DELETE NO ACTION
+#     ON UPDATE NO ACTION)
+# ENGINE = InnoDB;
+#
+#
+# SET SQL_MODE=@OLD_SQL_MODE;
+# SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+# SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

@@ -13,7 +13,7 @@ import java.util.Set;
 public class ClienteHasComercial {
     private Cliente cliente;
     private Comercial comercial;
-    private LocalDate fecha_asociacion;
+    private LocalDate fechaAsociacion;
     private int prioridad;
 }
 

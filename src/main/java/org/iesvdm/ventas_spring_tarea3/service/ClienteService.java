@@ -1,8 +1,10 @@
 package org.iesvdm.ventas_spring_tarea3.service;
 
 import org.iesvdm.ventas_spring_tarea3.dao.ClienteDAOImpl;
+import org.iesvdm.ventas_spring_tarea3.dao.ClienteHasComercialDAOImpl;
 import org.iesvdm.ventas_spring_tarea3.dao.PedidoDAOImpl;
 import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
+import org.iesvdm.ventas_spring_tarea3.domain.ClienteHasComercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,9 +120,6 @@ public class ClienteService {
 
         return pedidosLustro;
     }
-
-
-
 
 
 

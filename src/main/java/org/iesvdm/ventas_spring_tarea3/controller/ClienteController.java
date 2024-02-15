@@ -2,9 +2,11 @@ package org.iesvdm.ventas_spring_tarea3.controller;
 
 import jakarta.validation.Valid;
 import org.iesvdm.ventas_spring_tarea3.domain.Cliente;
+import org.iesvdm.ventas_spring_tarea3.domain.ClienteHasComercial;
 import org.iesvdm.ventas_spring_tarea3.domain.Comercial;
 import org.iesvdm.ventas_spring_tarea3.dto.ClienteDTO;
 import org.iesvdm.ventas_spring_tarea3.mapstrut.ClienteMapper;
+import org.iesvdm.ventas_spring_tarea3.service.ClienteHasComercialService;
 import org.iesvdm.ventas_spring_tarea3.service.ClienteService;
 import org.iesvdm.ventas_spring_tarea3.service.ComercialService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,10 @@ public class ClienteController {
 
     @Autowired
     private ComercialService comercialService;
+
+    @Autowired
+    private ClienteHasComercialService clienteHasComercialService;
+
 
     @GetMapping("/clientes")
     public String listar (Model model) {
@@ -88,6 +94,12 @@ public class ClienteController {
         List<Comercial> listaComerciales = comercialService.listAll();
         model.addAttribute("listaComerciales", listaComerciales);
 
+        ClienteHasComercial clienteHasComercial = new ClienteHasComercial();
+        model.addAttribute("clienteHasComercial", clienteHasComercial);
+
+        List<ClienteHasComercial> listaComercialesAsociados = clienteHasComercialService.listAll();
+        model.addAttribute("listaComercialesAsociados", listaComercialesAsociados);
+
         return "editar-cliente";
     }
 
@@ -105,7 +117,7 @@ public class ClienteController {
 //    }
 
     @PostMapping("/clientes/editar/{id}")
-    public String submitEditar(@Valid @ModelAttribute("comercial") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
+    public String submitEditar(@Valid @ModelAttribute("cliente") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("cliente", cliente);
             model.addAttribute("comercial", comercial);
@@ -114,14 +126,21 @@ public class ClienteController {
         clienteService.replaceCliente(cliente);
         List<Cliente> listaClientes = clienteService.listAll();
         model.addAttribute("listaClientes", listaClientes);
+
         //Devuelve al listado con to dos los clientes tras editar un cliente
-        return "/editar-cliente";
+        return "/clientes";
     }
 
-//    @PostMapping("/clientes/editar/{id}")
-//    public String submitEditar(@Valid @ModelAttribute("comercial") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, BindingResult bindingResult, Model model) {
-//
-//    }
+
+    @PostMapping("/clientes/aniadir-comercial/{id}")
+    public String submitAniadirComercial (@Valid @ModelAttribute("cliente") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, @Valid @ModelAttribute("cliente_has_comercial") ClienteHasComercial clienteHasComercial, BindingResult bindingResult, Model model) {
+        clienteHasComercialService.createClienteHasComercial(clienteHasComercial);
+        List<ClienteHasComercial> listaComercialesAsociados = clienteHasComercialService.listAll();
+        model.addAttribute("listaComercialesAsociados", listaComercialesAsociados);
+
+        //devuelve al formulario de editar con los comerciales añadidos
+        return "editar-cliente";
+    }
 
     @PostMapping("/clientes/borrar/{id}")
     public RedirectView submitBorrar(@PathVariable Integer id) {
