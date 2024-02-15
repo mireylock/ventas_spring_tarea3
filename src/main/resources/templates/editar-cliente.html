@@ -28,6 +28,7 @@
         </div>
     </div>
 
+    <!-- CLIENTE -->
     <form th:action="@{/clientes/editar/__${cliente.id}__}" th:object="${cliente}" th:method="post" >
         <h1 class="row justify-content-center mb-3" th:text="#{editarCliente}">Editar Cliente</h1>
 
@@ -118,55 +119,53 @@
         </div>
     </form>
 
-    <!-- EXTRA: AÑADIR COMERCIALES AL CLIENTE-->
-<!--    <div class="container mt-3">-->
-<!--        <div class="row justify-content-center">-->
-<!--            <form th:action="@{/clientes/aniadir-comercial/__${cliente.id}__}" th:object="${clienteHasComercial}" th:method="post">-->
-<!--                <div class="mb-3">-->
-<!--                    <label for="selectcomercial" class="form-label">Comercial</label>-->
-<!--                    <select id="selectcomercial" class="form-select">-->
-<!--                        <option value="-1">Seleccione opción</option>-->
-<!--                        <option-->
-<!--                                th:value="${comercial.id}"-->
-<!--                                th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido + ' ' + comercial.apellido2}"-->
-<!--                                th:each="comercial:${listaComerciales}">-->
-<!--                        </option>-->
-<!--                    </select>-->
-<!--                </div>-->
+<!--     EXTRA: AÑADIR COMERCIALES AL CLIENTE-->
+    <div class="container mt-3">
+        <div class="row justify-content-center">
+            <form th:action="@{/clientes/aniadir/__${cliente.id}__}" th:object="${clienteHasComercial}" th:method="post">
+                <div class="mb-3">
+                    <label for="selectcomercial" class="form-label">Comercial</label>
+                    <select id="selectcomercial" class="form-select">
+                        <option value="-1">Seleccione opción</option>
+                        <option
+                                th:value="${comercial.id}"
+                                th:text="${'Id: ' + comercial.id + ' - ' + comercial.nombre + ' ' + comercial.apellido + ' ' + comercial.apellido2}"
+                                th:each="comercial:${listaComerciales}">
+                        </option>
+                    </select>
+                </div>
 
-<!--                <div class="form-group">-->
-<!--                    <label for="fechaAsociacion" >Fecha asociacion</label>-->
-<!--                    <input type="text" class="form-control" id="fechaAsociacion"  th:classappend="${#fields.hasErrors('fechaAsociacion')?'is-invalid':''}" th:field="*{fechaAsociacion}" value="FechaAsociacion" />-->
-<!--                    <span class="text-danger " th:if="${#fields.hasErrors('fechaAsociacion')}">-->
-<!--                        <li th:each="err : ${#fields.errors('fechaAsociacion')}" th:text="${err}" />-->
-<!--                    </span>-->
-<!--                 </div>-->
+                <div class="form-group">
+                    <label for="fechaAsociacion" >Fecha asociacion</label>
+                    <input type="text" class="form-control" id="fechaAsociacion"  th:classappend="${#fields.hasErrors('fechaAsociacion')?'is-invalid':''}" th:field="*{fechaAsociacion}" value="FechaAsociacion" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('fechaAsociacion')}">
+                        <li th:each="err : ${#fields.errors('fechaAsociacion')}" th:text="${err}" />
+                    </span>
+                 </div>
 
-<!--                <div class="form-group">-->
-<!--                    <label for="prioridad" >Prioridad</label>-->
-<!--                    <input type="text" class="form-control" id="prioridad" th:classappend="${#fields.hasErrors('prioridad')?'is-invalid':''}" th:field="*{prioridad}" value="prioridad" />-->
-<!--                    <span class="text-danger " th:if="${#fields.hasErrors('prioridad')}">-->
-<!--                        <li th:each="err : ${#fields.errors('prioridad')}" th:text="${err}" />-->
-<!--                    </span>-->
-<!--                </div>-->
+                <div class="form-group">
+                    <label for="prioridad" >Prioridad</label>
+                    <input type="text" class="form-control" id="prioridad" th:classappend="${#fields.hasErrors('prioridad')?'is-invalid':''}" th:field="*{prioridad}" value="prioridad" />
+                    <span class="text-danger " th:if="${#fields.hasErrors('prioridad')}">
+                        <li th:each="err : ${#fields.errors('prioridad')}" th:text="${err}" />
+                    </span>
+                </div>
 
-<!--                <div class="mb-3">-->
-<!--                    <input type="submit" value="Añadir Comercial" class="btn btn-success">-->
-<!--                </div>-->
-
-
-
-<!--                &lt;!&ndash; LISTA CON LOS COMERCIALES ASOCIADOS &ndash;&gt;-->
-<!--                <div>-->
-<!--                    <h4>Comerciales asociados</h4>-->
-<!--                    <div th:each="comercialAsociado:${listaComercialesAsociados}">-->
-<!--                        <div th:text="${'Id: ' + comercialAsociado.getComercial().getId() + ' - ' + comercialAsociado.getComercial().getNombre() + ' ' + comercialAsociado.getComercial().getApellido() + ' ' + comercialAsociado.getComercial().getApellido2() + ' - Fecha asociación:' + comercialAsociado.getFechaAsociacion() + ', prioridad: ' + comercialAsociado.getPrioridad()}"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-<!--            </form>-->
+                <div class="mb-3">
+                    <input type="submit" value="Añadir Comercial" class="btn btn-success">
+                </div>
 
 
+
+                <!-- LISTA CON LOS COMERCIALES ASOCIADOS -->
+                <div>
+                    <h4>Comerciales asociados</h4>
+                    <div th:each="comercialAsociado:${listaComercialesAsociados}">
+                        <div th:text="${'Id: ' + comercialAsociado.getComercial().getId() + ' - ' + comercialAsociado.getComercial().getNombre() + ' ' + comercialAsociado.getComercial().getApellido() + ' ' + comercialAsociado.getComercial().getApellido2() + ' - Fecha asociación:' + comercialAsociado.getFechaAsociacion() + ', prioridad: ' + comercialAsociado.getPrioridad()}"></div>
+                    </div>
+                </div>
+
+            </form>
         </div>
     </div>
 

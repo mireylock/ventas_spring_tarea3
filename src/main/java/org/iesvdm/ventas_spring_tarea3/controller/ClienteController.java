@@ -132,7 +132,7 @@ public class ClienteController {
     }
 
 
-    @PostMapping("/clientes/aniadir-comercial/{id}")
+    @PostMapping("/clientes/aniadir/{id}")
     public String submitAniadirComercial (@Valid @ModelAttribute("cliente") Cliente cliente, @Valid @ModelAttribute("comercial") Comercial comercial, @Valid @ModelAttribute("cliente_has_comercial") ClienteHasComercial clienteHasComercial, BindingResult bindingResult, Model model) {
         clienteHasComercialService.createClienteHasComercial(clienteHasComercial);
         List<ClienteHasComercial> listaComercialesAsociados = clienteHasComercialService.listAll();
